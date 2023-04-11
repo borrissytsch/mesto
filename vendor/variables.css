@@ -1,0 +1,125 @@
+:root {
+  --cousteau_back_image: url(./../../../images/cousteau/button_plus.png);
+  --cousteau_inner_box: url(./../../../images/cousteau/cousteau_inner_box.png);
+  --table_grid_background: url(./../../../images/table/grid_background.png);
+  --profiledit_save_button: url(./../../../images/profiledit/save_ectangle.png);
+  --profiledit_input_line: url(./../../../images/profiledit/input_line.png);
+  /* ---------------------------- General config ---------------------------- */
+  --page_width: 1280;
+  --default_section_left: 200;
+  --default_color: #fff;
+  --default_back_color: #000;
+  /* ---------------------------- Fonts config ---------------------------- */
+  --default_head_fnsize_p: 42;
+  --default_head_lnhght_p: 48;
+  --default_head_fnwght: 500;
+  --default_capt_fnsize_p: 24;
+  --default_capt_lnhght_p: 29;
+  --default_capt_fnwght: 900;
+  --default_text_fnsize_p: 18;
+  --default_text_lnhght_p: 22;
+  --default_text_fnwght: 400;
+   /* ---------------------------- Header config ---------------------------- */
+   --header_top: 45;
+   --header_left: var(--default_section_left);
+   --logo_width: 142;
+   --logo_height: 33;
+   --logo_aspect: var(--logo_width)/var(--logo_height);
+   --line_gap: 41;
+   --line_width: 880;
+   --line_border: 1;
+   --line_color: #545454;
+   --line_opacity: 0.7;
+  /* ---------------------------- Content config ---------------------------- */
+   --content_top: 36;
+   --cousteau_left: 178;
+   --cousteau_right: var(--default_section_left);
+   --cousteau_img_width: 169;
+   --cousteau_img_height: 128;
+   --cousteau_aspect: 1/1;
+   --cousteau_radius: 50%;
+   --cousteau_title_len: 294;
+   --cousteau_subtitle_len: 336;
+   --cousteau_left_gap: 4;
+   --cousteau_right_gap: 18;
+   --cousteau_row_gap: 16;
+   --cousteau_box_side: 24;
+   --cousteau_box_top: 36;
+   --cousteau_button_width: 150;
+   --cousteau_button_height: 50;
+   --cousteau_button_radius: 2;
+   --profiledit_popup_width: 430;
+   --profiledit_popup_height: 330;
+   --profiledit_backcolor: var(--default_color);
+   --profiledit_close_side: 32;
+   --profiledit_close_gap: 8;
+   --profiledit_radius: 10;
+   --profiledit_items_left: 32;
+   --profiledit_input_width: 358;
+   --profiledit_input_height: 50;
+   --places_top: 47;
+   --table_left: var(--default_section_left);
+   --table_height: 361;
+   --table_img_size: 282;
+   --table_img_aspect: 1/1;
+   --table_colgap: 17;
+   --table_rowgap: 20;
+   --table_radius: 10;
+   --table_caption_left: 21;
+   --table_caption_right: 30;
+   --table_icon_width: 22;
+   --table_icon_height: 19;
+  /* ---------------------------- Footer config ---------------------------- */
+  --footer_top: 67;
+  --footer_left: var(--default_section_left);
+}
+
+@media screen and (max-width: 968px) {
+  :root {
+    --cousteau_button_width: 282;
+    --cousteau_align_gap: 8;
+    --cousteau_align_left: 8;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+   --cousteau_title_height: 39;
+   --cousteau_subtitle_height: 18;
+  }
+}
+
+@media screen and (max-width: 562px) {
+  :root {
+    --default_head_fnsize_p: 27;
+    --default_head_lnhght_p: 33;
+    --default_text_fnsize_p: 14;
+    --default_text_lnhght_p: 17;
+    --header_top: 28;
+    --logo_width: 104;
+    --logo_height: 24;
+    --line_gap: 32;
+    --content_top: 38;
+    --cousteau_box_side: 18;
+    --profiledit_popup_width: 282;
+    --profiledit_popup_height: 322;
+    --profiledit_items_left: 22;
+    --profiledit_input_width: 238;
+    --profiledit_input_height: 46;
+    --profiledit_close_side: 20;
+    --places_top: 36;
+    --footer_top: 48;
+  }
+}
+
+@media screen and  (max-width: 320px) {
+  :root {
+    --page_width: 320;
+    --default_section_left: 19;
+    --header_left: 27;
+    --line_width: 320;
+    --cousteau_title_len: 189;
+    --cousteau_subtitle_len: 282;
+    --cousteau_row_gap: 14;
+  }
+}

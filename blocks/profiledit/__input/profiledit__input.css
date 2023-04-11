@@ -1,0 +1,8 @@
+.profiledit__input {
+  width: calc(var(--profiledit_input_width)*1px);
+  height: calc(var(--profiledit_input_height)*1px);
+  border: 0;
+  background-image: var(--profiledit_input_line);
+  background-position: bottom;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,20 @@
+.profiledit__form {
+  margin: 0;
+  margin-top: calc(var(--profiledit_close_gap)*1px);
+  width: calc(var(--profiledit_popup_width)*1px);
+  height: calc(var(--profiledit_popup_height)*1px);
+  display: flex;
+  flex-direction: inherit;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  background-color: var(--profiledit_backcolor);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  border-radius: calc(var(--profiledit_radius)*1px);
+}
+
+@media screen and (max-width: 562px) {
+  .profiledit__form {
+    margin-left: calc(var(--profiledit_items_left)*1px);
+  }
+}

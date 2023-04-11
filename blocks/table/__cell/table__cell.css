@@ -1,0 +1,38 @@
+.table__cell {
+  margin: 0;
+  max-width: calc(var(--table_img_size)*1px);
+  max-height: calc(var(--table_height)*1px);
+  display: grid;
+  grid-template-areas: 
+    "image image"
+    "caption icon"
+  ;
+  grid-template-columns: auto;
+  grid-template-rows: auto calc((var(--table_height) - var(--table_img_size))*1px);
+  justify-content:left;
+  align-items: center;
+  border-radius: calc(var(--table_radius)*1px);
+  background-image: var(--table_grid_background);
+}                                                                                                                                                                                               /* border: 2px dotted deepskyblue; */
+
+/*
+.table__cell:last-of-type {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .table__cell+.table__cell {
+    --table_rowgap: var(--table_align_gap);
+    --table_align_partop: 3;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .table__cell {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap:  calc(var(--table_rowgap)*1px);
+  }
+}*/

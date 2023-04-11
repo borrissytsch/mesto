@@ -1,0 +1,20 @@
+.cousteau__button {
+  width: calc(var(--cousteau_button_width)*1px);
+  height: calc(var(--cousteau_button_height)*1px);
+  background-image: var(--cousteau_back_image);
+  background-position: center;
+  background-repeat: no-repeat; 
+}                                                                                                                                                                                                  /* border-color:blueviolet; border-style: dashed; */
+
+@media screen and (max-width: 844px) {
+  .cousteau__button {
+    margin-top: calc(var(--cousteau_align_gap)*1px);
+    margin-left: calc((var(--default_section_left) - var(--cousteau_left) + var(--cousteau_align_left))*1px);
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .cousteau__button {
+    margin-top: calc((var(--cousteau_row_gap) + var(--cousteau_align_gap))*1px);
+  }
+}

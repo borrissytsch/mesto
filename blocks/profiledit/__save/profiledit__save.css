@@ -1,0 +1,7 @@
+.profiledit__save {
+  width: calc((var(--profiledit_input_width) + 6)*1px);
+  height: calc(var(--profiledit_input_height)*1px);
+  background-image: var(--profiledit_save_button);
+  border-radius: calc(var(--cousteau_button_radius)*1px);
+  object-fit: fill;
+}

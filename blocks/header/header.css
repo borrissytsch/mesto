@@ -1,0 +1,21 @@
+.header {
+  margin-top: calc(var(--header_top)*1px);
+  margin-left: calc(var(--header_left)*1px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: calc(var(--line_gap)*1px);
+}                                                                                                                                                                                        /* border-color: red; border-style: solid; */
+
+@media screen and (max-width: 1279px) {
+  .header {
+    margin-left: calc(var(--header_left)/var(--page_width)*100vw);
+   }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    margin-left: calc(var(--header_left)*1px);
+   }
+}

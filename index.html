@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="4-й учебный проект Д. Заболотнова на Яндекс.Практикуме">
+  <meta name="keywords" content="html, css, javascript">
+  <meta name="author" content="Dmitry Zabolotnov">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Место</title>
+</head>
+<body class="page">
+<header  class="header">
+  <img src="./images/header/logo.svg" class="header__logo" alt="Лого Место">
+  <img src="./images/header/line.png" class="header__line" alt="Линия заголовка">
+</header>
+<main class="content">
+  <section class="cousteau">
+    <div class="cousteau__item">
+      <img src="./images/cousteau/cousteau_image.jpg" class="cousteau__image" id="gridPhoto" alt="Жак-Ив Кусто">
+      <h1 class="cousteau__title" id="gridTitle">Жак-Ив Кусто</h1>
+      <img src="./images/cousteau/cousteau_right_box.png" class="cousteau__box" id="gridBox" alt="Бокс">
+      <p class="cousteau__subtitle" id="gridSubtitle">Исследователь океана</p>
+    </div>
+    <img src="./images/cousteau/button_rectangle.png" class="cousteau__button" alt="Кнопка">
+  </section>
+  <section class="profiledit">
+    <img class="profiledit__close" src="./images/profiledit/close_icon.png" alt="Закрыть">
+    <div class="profiledit__form">
+      <h2 class="profiledit__title">Редактировать профиль</h2>
+      <input class="profiledit__input" type="text" placeholder="Имя">
+      <input class="profiledit__input" type="text" placeholder="О себе">
+      <div class="profiledit__save">
+        <p style=" text-align: center;">Сохранить</p>
+      </div>
+    </div>
+  </section>
+  <section class="places" aria-label="три колонки">
+    <ul class="table">
+      <li class="table__cell">
+        <img class="table__image table__image_area" src="./images/table/table_01_carachaevsk.jpg" alt="Карачаевск">
+        <h2 class="table__title table__title_area">Карачаевск</h2>
+        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+      </li>
+      <li class="table__cell">
+        <img class="table__image table__image_area" src="./images/table/table_02_elbrus.jpg" alt="Эльбрус">
+        <h2 class="table__title table__title_area">Эльбрус</h2>
+        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+      </li>
+      <li class="table__cell">
+        <img class="table__image table__image_area" src="./images/table/table_03_dombay.jpg" alt="Домбай">
+        <h2 class="table__title table__title_area">Домбай</h2>
+        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+      </li>
+      <li class="table__cell">
+        <img class="table__image table__image_area" src="./images/table/table_04_elbrus.jpg" alt="Эльбрус">
+        <h2 class="table__title table__title_area">Эльбрус</h2>
+        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+      </li>
+      <li class="table__cell">
+        <img class="table__image table__image_area" src="./images/table/table_05_dombay.jpg" alt="Домбай">
+        <h2 class="table__title table__title_area">Домбай</h2>
+        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+      </li>
+      <li class="table__cell">
+        <img class="table__image table__image_area" src="./images/table/table_06_carachaevo_cherkessya.jpg" alt="Карачаево-Черкесия">
+        <h2 class="table__title table__title_area">Карачаево-Черкесия</h2>
+        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+      </li>
+    </ul>
+  </section>
+</main>
+<footer class="footer">
+  <p>© 2023 Mesto Russia</p>
+</footer>
+<script src="./scripts/script.js"></script>
+</body></html>

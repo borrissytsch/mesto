@@ -1,0 +1,17 @@
+.header__line {
+  max-width: calc(var(--line_width)*1px);
+  border: calc(var(--line_border)*1px) solid var(--line_color);
+  opacity: var(--line_opacity);
+}                                                                                                                                                                                                      /* border: 2px dotted deepskyblue; */
+
+@media screen and (max-width: 1279px) {
+  .header__line {
+    max-width: calc(var(--line_width)*100vw/var(--page_width));
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__line {
+    max-width: calc(var(--line_width)*1px);
+  }
+}

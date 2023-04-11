@@ -1,0 +1,16 @@
+.profiledit__title {
+  margin-left: calc(var(--profiledit_items_left)*1px);
+  align-self: flex-start;
+  text-align: left;
+  font-size: calc(var(--default_capt_fnsize_p)*1px);
+  line-height: calc(var(--default_capt_lnhght_p)*1px);
+  font-weight: var(--default_capt_fnwght);
+  color: var(--default_back_color);
+}
+
+@media screen and (max-width: 562px) {
+  .profiledit__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
