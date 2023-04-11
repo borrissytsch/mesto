@@ -5,8 +5,7 @@
   display: grid;
   grid-template-areas: 
     "image image"
-    "caption icon"
-  ;
+    "caption icon";
   grid-template-columns: auto;
   grid-template-rows: auto calc((var(--table_height) - var(--table_img_size))*1px);
   justify-content:left;
