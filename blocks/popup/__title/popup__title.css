@@ -1,4 +1,4 @@
-.profiledit__title {
+.popup__title {
   margin-left: calc(var(--profiledit_items_left)*1px);
   align-self: flex-start;
   text-align: left;

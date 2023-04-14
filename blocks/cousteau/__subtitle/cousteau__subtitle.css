@@ -16,3 +16,10 @@
     justify-self: center;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .cousteau__subtitle {
+    margin-top: -6px;
+    justify-self: center;
+  }
+}

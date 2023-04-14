@@ -1,16 +1,15 @@
-.profiledit {
-  margin: 0 auto;
+.popup__container {
+  margin: calc((var(--popup_top) - var(--cousteau_box_side))*1px) auto;
   max-width: calc((var(--profiledit_popup_width) + (var(--profiledit_close_gap) + var(--profiledit_close_side))*2)*1px);
   height: calc((var(--profiledit_popup_height) + var(--profiledit_close_gap) + var(--profiledit_close_side))*1px);
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 }
 
 @media screen and (max-width: 562px) {
-  .profiledit {
-    margin-top: calc(var(--profiledit_close_gap)*1px);
+  .popup__container {
     max-width: calc(var(--profiledit_popup_width)*1px);
   }
 }

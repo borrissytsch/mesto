@@ -4,7 +4,3 @@
   max-height: calc(var(--table_icon_height)*1px);
   justify-self: right;
 }                                                                                                                                                                                            /* outline: 1px dashed darkgreen; */
-/*
-.table__link:hover {
-  opacity: 0.8;
-}*/

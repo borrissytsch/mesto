@@ -20,3 +20,10 @@
     margin-top: calc(var(--cousteau_align_gap)*2px);
   }
 }
+
+@media screen and (max-width: 320px) {
+  .cousteau__title {
+    margin-top: calc(var(--cousteau_title_altop)*1px);
+    margin-left: calc(var(--cousteau_img_aleft)*16px);
+  }
+}

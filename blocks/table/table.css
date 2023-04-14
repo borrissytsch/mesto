@@ -10,7 +10,6 @@
   row-gap: calc(var(--table_rowgap)*1px);
   flex-wrap: wrap;
   list-style-type: none;
- /* border-color:blueviolet; border-style: dashed; */
 }
 
 @media screen and (max-width: 1279px) {

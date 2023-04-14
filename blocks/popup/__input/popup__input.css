@@ -1,4 +1,4 @@
-.profiledit__input {
+.popup__input {
   width: calc(var(--profiledit_input_width)*1px);
   height: calc(var(--profiledit_input_height)*1px);
   border: 0;

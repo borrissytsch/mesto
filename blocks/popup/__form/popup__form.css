@@ -1,4 +1,4 @@
-.profiledit__form {
+.popup__form {
   margin: 0;
   margin-top: calc(var(--profiledit_close_gap)*1px);
   width: calc(var(--profiledit_popup_width)*1px);

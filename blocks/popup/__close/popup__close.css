@@ -1,4 +1,5 @@
-.profiledit__close {
+.popup__close {
   max-width: calc(var(--profiledit_close_side)*1px);
   align-self: flex-end;
+  background-color: var(--default_back_color);
 }

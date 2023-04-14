@@ -1,4 +1,6 @@
 .cousteau__image {
+  margin-top: calc(var(--cousteau_img_altop)*1px);
+  margin-left: calc(var(--cousteau_img_aleft)*1px);
   max-width: calc(var(--cousteau_img_width)*1px);
   max-height: calc(var(--cousteau_img_height)*1px);
   border-radius: var(--cousteau_radius);
@@ -11,5 +13,11 @@
 @media screen and (max-width: 768px) {
   .cousteau__image {
     margin-left: calc((var(--default_section_left) - var(--cousteau_left))*1px);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .cousteau__image {
+    margin-top: calc(-2*var(--cousteau_img_altop)*1px);
   }
 }

@@ -1,9 +1,9 @@
-const thisForm = document.querySelector('.profiledit');
-const edit_button = document.querySelector('.cousteau__button');
-const close_button = document.querySelector('.profiledit__close');
-const save_button = document.querySelector('.profiledit__save');
-const inputName = document.querySelector(".profiledit__input:first-of-type");
-const inputAbout = document.querySelector(".profiledit__input:last-of-type");
+const thisForm = document.querySelector('.popup');
+const edit_button = document.querySelector('.cousteau__box');
+const close_button = document.querySelector('.popup__close');
+const save_button = document.querySelector('.popup__save');
+const inputName = document.querySelector(".popup__input:first-of-type");
+const inputAbout = document.querySelector(".popup__input:last-of-type");
 const profileName = document.querySelector('.cousteau__title');
 const profileAbout = document.querySelector('.cousteau__subtitle');
 
@@ -12,14 +12,14 @@ save_button.addEventListener('click', saveProfile);
 close_button.addEventListener('click', closeProfile);
 
 function editProfile () {
-  thisForm.setAttribute('class', "profiledit profiledit_opened");
+  thisForm.setAttribute('class', "popup popup_opened");
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
 }
 function closeProfile() {
   inputName.value = null;
   inputAbout.value = null;
-  thisForm.setAttribute('class', "profiledit");
+  thisForm.setAttribute('class', "popup");
 }
 function saveProfile() {
   profileName.textContent = inputName.value;
