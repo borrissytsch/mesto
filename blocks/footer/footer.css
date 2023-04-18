@@ -1,4 +1,5 @@
 .footer {
+  margin: 0;
   margin-top: calc((var(--footer_top))*1px);
   margin-left: calc(var(--footer_left)*1px);
   font-size: calc(var(--default_text_fnsize_p)*1px);
@@ -18,17 +19,3 @@
     margin-left: calc(var(--footer_left)*1px);
   }
 }
-/*
-@media screen and (min-width: 1024px) and (max-width: 1152px) {
-  .footer {
-   margin-left: calc(var(--footer_left)/var(--page_width)*100%);
-  }  
-}
-
-@media screen and (max-width: 320px) {
-  .footer {
-    flex-direction: column;
-    justify-content: flex-start;
-    row-gap: 47px;
-  }
-}*/

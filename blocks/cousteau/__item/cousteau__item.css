@@ -8,26 +8,10 @@
   grid-template-rows: auto;
   justify-content: left;
   align-items: end;
-  height: calc(var(--cousteau_img_height)*1px);
+  min-height: calc(var(--cousteau_img_height)*1px);
   column-gap: calc(var(--cousteau_left_gap)*1px);
   row-gap: calc(var(--cousteau_row_gap)*1px);
 }                                                                                                                                                                                                  /* border-color:blueviolet; border-style: dashed; */
-
-#gridPhoto {
-  grid-area: photo;
-}
-
-#gridTitle {
-  grid-area: title;
-}
-
-#gridSubtitle {
-  grid-area: subtitle;
-}
-
-#gridBox {
-  grid-area: box;
-}
 
 @media screen and (max-width: 768px) {
   .cousteau__item {

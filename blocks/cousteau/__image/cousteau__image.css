@@ -1,8 +1,9 @@
 .cousteau__image {
   margin-top: calc(var(--cousteau_img_altop)*1px);
-  margin-left: calc(var(--cousteau_img_aleft)*1px);
-  max-width: calc(var(--cousteau_img_width)*1px);
-  max-height: calc(var(--cousteau_img_height)*1px);
+  margin-left: calc((var(--cousteau_img_aleft) + (max(var(--cousteau_img_width), var(--cousteau_img_height)) - min(var(--cousteau_img_width), var(--cousteau_img_height)))/2)*1px);
+  margin-right: calc((max(var(--cousteau_img_width), var(--cousteau_img_height)) - min(var(--cousteau_img_width), var(--cousteau_img_height)))/2*1px);
+  max-width: calc(min(var(--cousteau_img_width), var(--cousteau_img_height))*1px);
+  max-height: calc(min(var(--cousteau_img_width), var(--cousteau_img_height))*1px);
   border-radius: var(--cousteau_radius);
   aspect-ratio: var(--cousteau_aspect);
   object-fit: cover;
@@ -18,6 +19,6 @@
 
 @media screen and (max-width: 320px) {
   .cousteau__image {
-    margin-top: calc(-2*var(--cousteau_img_altop)*1px);
+    margin-left: calc(var(--cousteau_img_align)*1px);
   }
 }

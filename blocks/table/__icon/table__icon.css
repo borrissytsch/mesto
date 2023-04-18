@@ -1,6 +1,12 @@
 .table__icon {
   margin-right: calc(var(--table_caption_right)*1px);
   max-width: calc(var(--table_icon_width)*1px);
-  max-height: calc(var(--table_icon_height)*1px);
+  height: calc(var(--table_icon_height)*1px);
   justify-self: right;
+  background-image: var(--table_heart_icon);
+  background-position: center;
+  aspect-ratio: var(--table_icon_aspect);
+  border: none;
+  object-fit: contain;
+  cursor: pointer;
 }                                                                                                                                                                                            /* outline: 1px dashed darkgreen; */

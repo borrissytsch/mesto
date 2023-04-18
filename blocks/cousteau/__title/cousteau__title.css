@@ -24,6 +24,6 @@
 @media screen and (max-width: 320px) {
   .cousteau__title {
     margin-top: calc(var(--cousteau_title_altop)*1px);
-    margin-left: calc(var(--cousteau_img_aleft)*16px);
+    margin-left: calc(var(--cousteau_title_aleft)*1px);
   }
 }

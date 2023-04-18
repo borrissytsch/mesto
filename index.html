@@ -12,49 +12,48 @@
 <body class="page">
 <header  class="header">
   <img src="./images/header/logo.svg" class="header__logo" alt="Лого Место">
-  <img src="./images/header/line.png" class="header__line" alt="Линия заголовка">
 </header>
 <main class="content">
   <section class="cousteau">
     <div class="cousteau__item">
-      <img src="./images/cousteau/cousteau_image.jpg" class="cousteau__image" id="gridPhoto" alt="Жак-Ив Кусто">
-      <h1 class="cousteau__title" id="gridTitle">Жак-Ив Кусто</h1>
-      <button type="button" class="cousteau__box" id="gridBox" form="profiledit"></button>
-      <p class="cousteau__subtitle" id="gridSubtitle">Исследователь океана</p>
+      <img src="./images/cousteau/cousteau_image.png" class="cousteau__image cousteau__area-photo" alt="Жак-Ив Кусто">
+      <h1 class="cousteau__title cousteau__area-title">Жак-Ив Кусто</h1>
+      <button type="button" class="cousteau__box cousteau__area-box" form="profiledit"></button>
+      <p class="cousteau__subtitle cousteau__area-subtitle">Исследователь океана</p>
     </div>
     <button type="button" class="cousteau__button"></button>
   </section>
   <section class="places" aria-label="три колонки">
     <ul class="table">
       <li class="table__cell">
-        <img class="table__image table__image_area" src="./images/table/table_01_carachaevsk.jpg" alt="Карачаевск">
-        <h2 class="table__title table__title_area">Карачаевск</h2>
-        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+        <img class="table__image table__area-image" src="./images/table/table_01_carachaevsk.jpg" alt="Карачаевск">
+        <h2 class="table__title table__area-title">Карачаевск</h2>
+        <button type="button" class="table__icon table__area-icon"></button>
       </li>
       <li class="table__cell">
-        <img class="table__image table__image_area" src="./images/table/table_02_elbrus.jpg" alt="Эльбрус">
-        <h2 class="table__title table__title_area">Гора Эльбрус</h2>
-        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+        <img class="table__image table__area-image" src="./images/table/table_02_elbrus.jpg" alt="Эльбрус">
+        <h2 class="table__title table__area-title">Гора Эльбрус</h2>
+        <button type="button" class="table__icon table__area-icon"></button>
       </li>
       <li class="table__cell">
-        <img class="table__image table__image_area" src="./images/table/table_03_dombay.jpg" alt="Домбай">
-        <h2 class="table__title table__title_area">Домбай</h2>
-        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+        <img class="table__image table__area-image" src="./images/table/table_03_dombay.jpg" alt="Домбай">
+        <h2 class="table__title table__area-title">Домбай</h2>
+        <button type="button" class="table__icon table__area-icon"></button>
       </li>
       <li class="table__cell">
-        <img class="table__image table__image_area" src="./images/table/table_04_elbrus.jpg" alt="Эльбрус">
-        <h2 class="table__title table__title_area">Гора Эльбрус</h2>
-        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+        <img class="table__image table__area-image" src="./images/table/table_04_elbrus.jpg" alt="Эльбрус">
+        <h2 class="table__title table__area-title">Гора Эльбрус</h2>
+        <button type="button" class="table__icon table__area-icon"></button>
       </li>
       <li class="table__cell">
-        <img class="table__image table__image_area" src="./images/table/table_05_dombay.jpg" alt="Домбай">
-        <h2 class="table__title table__title_area">Домбай</h2>
-        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+        <img class="table__image table__area-image" src="./images/table/table_05_dombay.jpg" alt="Домбай">
+        <h2 class="table__title table__area-title">Домбай</h2>
+        <button type="button" class="table__icon table__area-icon"></button>
       </li>
       <li class="table__cell">
-        <img class="table__image table__image_area" src="./images/table/table_06_carachaevo_cherkessya.jpg" alt="Карачаево-Черкесия">
-        <h2 class="table__title table__title_area">Карачаево-Черкесия</h2>
-        <img class="table__icon table__icon_area" src="./images/table/table_heart_icon.svg" alt="Сердечко">
+        <img class="table__image table__area-image" src="./images/table/table_06_carachaevo_cherkessya.jpg" alt="Карачаево-Черкесия">
+        <h2 class="table__title table__area-title">Карачаево-Черкесия</h2>
+        <button type="button" class="table__icon table__area-icon"></button>
       </li>
     </ul>
   </section>
@@ -62,18 +61,20 @@
 <footer class="footer">
   <p>© 2023 Mesto Russia</p>
 </footer>
-<section class="popup">
+<div class="popup">
   <div class="popup__container">
-    <button type="button" class="popup__close" form="profiledit"><img src="./images/popup/close_icon.png" alt="Закрыть"></button>
-    <form class="popup__form" id="profiledit">
+    <button type="button" class="popup__close" form="profiledit"></button>
+    <div class="popup__form">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <fieldset style="border: 0;">
-        <input class="popup__input" type="text" placeholder="Имя">
-        <input class="popup__input" type="text" placeholder="О себе">
-      </fieldset>
-      <button type="button" class="popup__save">Сохранить</button>
-    </form>
+      <form class="popup__items" id="profiledit" name="profiledit_frm">
+        <fieldset class="popup__fields">
+          <input class="popup__input popup__input_type_name" type="text" placeholder="Имя">
+          <input class="popup__input popup__input_type_about" type="text" placeholder="О себе">
+        </fieldset>
+        <button type="submit" class="popup__save">Сохранить</button>
+      </form>
+    </div>
   </div>
-</section>
-<script src="./scripts/script.js"></script>
+</div>
+<script src="./scripts/index.js"></script>
 </body></html>

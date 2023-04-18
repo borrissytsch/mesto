@@ -1,5 +1,11 @@
 .popup__close {
-  max-width: calc(var(--profiledit_close_side)*1px);
+  width: calc(var(--profiledit_close_side)*1px);
+  height: calc(var(--profiledit_close_side)*1px);
   align-self: flex-end;
-  background-color: var(--default_back_color);
+  background-color: rgba(0, 0, 0, 0);
+  background-image: var(--profiledit_close_button);
+  aspect-ratio: var(--profiledit_close_aspect);
+  background-position: center;
+  border: none;
+  cursor: pointer;
 }
