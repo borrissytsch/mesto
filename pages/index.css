@@ -4,7 +4,6 @@
 @import url(../blocks/page/page.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
-@import url(../blocks/header/__line/header__line.css);
 @import url(../blocks/content/content.css);
 @import url(../blocks/cousteau/cousteau.css);
 @import url(../blocks/cousteau/__item/cousteau__item.css);
@@ -26,8 +25,6 @@
 @import url(../blocks/popup/__items/popup__items.css);
 @import url(../blocks/popup/__fields/popup__fields.css);
 @import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__input/_type/popup__input_type_about.css);
-@import url(../blocks/popup/__input/_type/popup__input_type_name.css);
 @import url(../blocks/popup/__save/popup__save.css);
 @import url(../blocks/places/places.css);
 @import url(../blocks/table/table.css);
@@ -37,5 +34,7 @@
 @import url(../blocks/table/__title/table__title.css);
 @import url(../blocks/table/__area-title/table__area-title.css);
 @import url(../blocks/table/__icon/table__icon.css);
+@import url(../blocks/table/__icon/_like/table__icon_like.css);
 @import url(../blocks/table/__area-icon/table__area-icon.css);
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__paragraph/footer__paragraph.css);

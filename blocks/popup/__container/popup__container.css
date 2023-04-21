@@ -1,10 +1,9 @@
 .popup__container {
   margin: 0 auto;
-  margin-top: calc(var(--popup_top)*1px);
   width: calc((var(--profiledit_popup_width) + (var(--profiledit_close_gap) + var(--profiledit_close_side))*2)*1px);
   display: inherit;
   flex-direction: inherit;
-  justify-content: flex-start;
+  justify-content: inherit;
   align-items: center;
   gap: calc(var(--profiledit_close_gap)*1px);
 }

@@ -12,4 +12,4 @@
   align-items: center;
   border-radius: calc(var(--table_radius)*1px);
   background-image: var(--table_grid_background);
-}                                                                                                                                                                                               /* border: 2px dotted deepskyblue; */
+}

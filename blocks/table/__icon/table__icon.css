@@ -9,4 +9,8 @@
   border: none;
   object-fit: contain;
   cursor: pointer;
-}                                                                                                                                                                                            /* outline: 1px dashed darkgreen; */
+}
+
+.table__icon:hover {
+  opacity: 0.5;
+}

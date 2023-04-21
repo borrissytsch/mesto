@@ -4,7 +4,7 @@
   margin-right: calc(var(--header_left)*1px);
   padding-bottom: calc(var(--line_gap)*1px);
   border-bottom: calc(var(--line_border)*1px) solid var(--line_color);
-}                                                                                                                                                                                        /* border-color: red; border-style: solid; */
+}
 
 @media screen and (max-width: 1279px) {
   .header {

@@ -2,7 +2,7 @@
   margin-top: calc(var(--places_top)*1px);
   margin-left: calc(var(--table_left)/2*1px);
   margin-right: calc(var(--table_left)/2*1px);
-}                                                                                                                                                                               /* border-color: turquoise; border-style: solid; */
+}
 
 @media screen and  (max-width: 1279px) {
   .places {

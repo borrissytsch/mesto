@@ -1,8 +1,8 @@
 .popup__form {
   width: calc(var(--profiledit_popup_width)*1px);
-  min-height: calc(var(--profiledit_popup_height)*1px);
   display: inherit;
   flex-direction: inherit;
+  justify-content: flex-start;
   align-items: inherit;
   text-align: center;
   background-color: var(--profiledit_backcolor);

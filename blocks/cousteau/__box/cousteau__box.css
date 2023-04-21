@@ -8,11 +8,17 @@
   background-image: var(--cousteau_inner_box);
   background-position: center;
   background-repeat: no-repeat;
+  background-size: calc(var(--cousteau_stick_size)*1px) calc(var(--cousteau_stick_size)*1px);
+  padding: 0;
   border: 1px solid;
   border-color: var(--default_color);
   background-color: rgba(0,0, 0, 0);
   cursor: pointer;
-}                                                                                                                                                                                           /* border: 1px solid var(--default_color); */
+}
+
+.cousteau__box:hover {
+  opacity: var(--cousteau_btn_hoveropas);
+}
 
 @media screen and (max-width: 768px) {
   .cousteau__box {
