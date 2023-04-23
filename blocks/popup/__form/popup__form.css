@@ -1,5 +1,5 @@
 .popup__form {
-  width: calc(var(--profiledit_popup_width)*1px);
+  width: 100%;
   display: inherit;
   flex-direction: inherit;
   justify-content: flex-start;

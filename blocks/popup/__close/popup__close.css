@@ -2,8 +2,8 @@
   width: calc(var(--profiledit_close_side)*1px);
   height: calc(var(--profiledit_close_side)*1px);
   position: absolute;
-  top: calc((var(--profiledit_close_top) + var(--profiledit_close_gap) - var(--profiledit_close_side))*1px);
-  left: calc(var(--profiledit_close_gap)*1px + (100vw + var(--profiledit_popup_width)*1px)/2);
+  left: calc(100% + var(--profiledit_close_gap)*1px);
+  bottom: calc(100% + var(--profiledit_close_gap)*1px);
   background-color: rgba(0, 0, 0, 0);
   background-image: var(--profiledit_close_button);
   aspect-ratio: var(--profiledit_close_aspect);
@@ -16,9 +16,8 @@
   opacity: var(--cousteau_btn_hoveropas);
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 562px) {
   .popup__close {
-    top: calc((var(--profiledit_close_top) - 2*var(--profiledit_close_gap))*1px);
-    left: calc((100vw + (var(--profiledit_popup_width) - var(--profiledit_close_gap) - var(--profiledit_close_side))*1px)/2);
+    left: calc(100% - var(--profiledit_close_side)*1px);
   }
 }

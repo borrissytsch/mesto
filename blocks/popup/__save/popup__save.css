@@ -1,6 +1,7 @@
 .popup__save {
   margin-top: calc(var(--profiledit_save_top)*1px);
   margin-bottom: calc(var(--profiledit_save_bot)*1px);
+  margin-left: calc(var(--profiledit_save_alignleft)*1px);
   padding: 0;
   width: calc((var(--profiledit_save_width))*1px);
   height: calc(var(--profiledit_save_height)*1px);
@@ -17,4 +18,10 @@
 
 .popup__save:hover {
   background-color: rgba(0,0,0,0.8);
+}
+
+@media screen and (max-width: 562px) {
+  .popup__save {
+    margin-left: 0;   
+  } 
 }

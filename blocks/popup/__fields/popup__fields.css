@@ -1,4 +1,5 @@
 .popup__fields {
   margin-top: calc(var(--profiledit_fields_top)*1px);
+  margin-left: calc(var(--profiledit_fields_left)*1px);
   border: 0;
 }

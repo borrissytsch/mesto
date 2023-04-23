@@ -4,7 +4,7 @@
   margin-right: calc((max(var(--cousteau_img_width), var(--cousteau_img_height)) - min(var(--cousteau_img_width), var(--cousteau_img_height)))/2*1px);
   max-width: calc(min(var(--cousteau_img_width), var(--cousteau_img_height))*1px);
   max-height: calc(min(var(--cousteau_img_width), var(--cousteau_img_height))*1px);
-  border-radius: var(--cousteau_radius);
+  border-radius: calc(var(--cousteau_radius)*1px);
   aspect-ratio: var(--cousteau_aspect);
   object-fit: cover;
   justify-self: center;

@@ -1,11 +1,11 @@
 .popup__container {
   margin: 0 auto;
-  width: calc((var(--profiledit_popup_width) + (var(--profiledit_close_gap) + var(--profiledit_close_side))*2)*1px);
+  width: calc(var(--profiledit_popup_width)*1px);
+  position: relative;
   display: inherit;
   flex-direction: inherit;
   justify-content: inherit;
   align-items: center;
-  gap: calc(var(--profiledit_close_gap)*1px);
 }
 
 @media screen and (max-width: 562px) {

@@ -1,5 +1,4 @@
 .table__area-title {
   grid-area: caption;
   color: var(--default_back_color);
-  background-color: var(--default_color);
-}                                                                                                                                                                                                /* outline: 1px solid red; */
+}
