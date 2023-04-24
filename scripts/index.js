@@ -11,13 +11,6 @@ edit_button.addEventListener('click', editProfile);
 close_button.addEventListener('click', closeProfile);
 profiledit_frm.addEventListener('submit', handleFormSubmit);
 
-// Подготовительная секция для закрашивания toggl'ом сердечка на Карачаевске
-const heart_icon = document.querySelector('.table__icon');
-heart_icon.addEventListener('click', toggleIconСolor);
-function toggleIconСolor() {
-  heart_icon.classList.toggle('table__icon_like');
-}
-
 function editProfile () {
   popup_main_page.setAttribute('class', "popup popup_opened");
   input_name_field.value = profile_name.textContent;

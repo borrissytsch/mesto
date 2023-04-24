@@ -35,9 +35,10 @@
    --cousteau_right: var(--default_section_left);
    --cousteau_img_width: 169;
    --cousteau_img_height: 128;
+   --cousteau_avatar_size: 120;
    --cousteau_aspect: 1/1;
    --cousteau_radius: 60;
-   --cousteau_img_altop: 6;
+   --cousteau_img_altop: calc(5 + (var(--cousteau_img_height) - var(--cousteau_avatar_size))/2);
    --cousteau_img_aleft: -6;
    --cousteau_title_len: 294;
    --cousteau_subtitle_len: 336;
@@ -155,7 +156,7 @@
     --line_width: 320;
     --cousteau_left: 78;
     --cousteau_img_altop: 0;
-    --cousteau_img_align: -36;
+    --cousteau_img_align: -35;
     --cousteau_title_len: 189;
     --cousteau_title_altop: 9;
     --cousteau_title_aleft: -34;
