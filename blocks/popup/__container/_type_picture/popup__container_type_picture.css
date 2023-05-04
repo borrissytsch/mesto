@@ -1,0 +1,3 @@
+.popup__container_type_picture {
+  margin-top: calc(var(--picture_popup_top)*1px);
+}

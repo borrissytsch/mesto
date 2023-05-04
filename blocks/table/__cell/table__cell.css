@@ -2,13 +2,14 @@
   margin: 0;
   max-width: calc(var(--table_img_size)*1px);
   max-height: calc(var(--table_height)*1px);
+  position: relative;
   display: grid;
   grid-template-areas: 
     "image image"
     "caption icon";
   grid-template-columns: auto;
   grid-template-rows: auto calc((var(--table_height) - var(--table_img_size))*1px);
-  justify-content:left;
+  justify-content: flex-start;
   align-items: center;
   border-radius: calc(var(--table_radius)*1px);
   background-image: var(--table_grid_background);

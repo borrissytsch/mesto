@@ -1,15 +1,8 @@
 .popup__container {
   margin: 0 auto;
-  width: calc(var(--profiledit_popup_width)*1px);
   position: relative;
   display: inherit;
   flex-direction: inherit;
   justify-content: inherit;
   align-items: center;
-}
-
-@media screen and (max-width: 562px) {
-  .popup__container {
-    max-width: calc(var(--profiledit_popup_width)*1px);
-  }
 }

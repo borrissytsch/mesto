@@ -1,0 +1,4 @@
+.popup__image_type_big {
+  max-width: calc(min(var(--picture_popup_maxwdth), var(--picture_image_bigwdth)*1px));
+  aspect-ratio: calc(var(--picture_image_bigwdth)/var(--picture_image_height));
+}

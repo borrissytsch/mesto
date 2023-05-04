@@ -1,0 +1,9 @@
+.popup__container_type_form {
+  width: calc(var(--profiledit_popup_width)*1px);
+}
+
+@media screen and (max-width: 562px) {
+  .popup__container {
+    max-width: calc(var(--profiledit_popup_width)*1px);
+  }
+}
