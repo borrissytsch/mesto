@@ -1,6 +1,6 @@
 .popup__image_type_big {
   max-width: calc(min(var(--picture_popup_maxwdth), var(--picture_image_bigwdth)*1px));
-  max-height: calc(min(var(--picture_popup_maxhght), min(var(--picture_popup_maxwdth), var(--picture_image_bigwdth)*1px)/var(--picture_image_bigwdth)*var(--picture_image_height)));
+  max-height: calc(min(var(--picture_popup_maxhght), var(--picture_image_height)*1px));
 }
 
 @media screen and (max-width: 562px) {

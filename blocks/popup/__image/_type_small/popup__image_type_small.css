@@ -1,4 +1,4 @@
 .popup__image_type_small {
-  max-width: calc(min(var(--picture_popup_maxwdth), min(var(--picture_popup_maxhght), var(--picture_image_height)*1px))*var(--picture_image_smalwdth)/var(--picture_image_height));
+  max-width: calc(min(var(--picture_popup_maxwdth), var(--picture_image_smalwdth)*1px));
   height: calc(min(var(--picture_popup_maxhght), var(--picture_image_height)*1px));
 }
