@@ -1,3 +1,4 @@
 .popup__items {
-  display: block; 
+  margin-top: calc(var(--profiledit_items_top)*1px);
+  display: block;
 }

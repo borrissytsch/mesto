@@ -24,76 +24,44 @@
     <button type="button" class="cousteau__button" form="cardadd"></button>
   </section>
   <section class="places" aria-label="три колонки">
-    <ul class="table">
-      <li class="table__cell">
-        <button type="button" class="table__trash"></button>
-        <img class="table__image table__area-image" src="./images/table/table_01_carachaevsk.jpg" alt="Карачаевск">
-        <h2 class="table__title table__area-title">Карачаевск</h2>
-        <button type="button" class="table__icon table__area-icon"></button>
-      </li>
-      <li class="table__cell">
-        <button type="button" class="table__trash"></button>
-        <img class="table__image table__area-image" src="./images/table/table_02_elbrus.jpg" alt="Эльбрус">
-        <h2 class="table__title table__area-title">Гора Эльбрус</h2>
-        <button type="button" class="table__icon table__area-icon"></button>
-      </li>
-      <li class="table__cell">
-        <button type="button" class="table__trash"></button>
-        <img class="table__image table__area-image" src="./images/table/table_03_dombay.jpg" alt="Домбай">
-        <h2 class="table__title table__area-title">Домбай</h2>
-        <button type="button" class="table__icon table__area-icon"></button>
-      </li>
-      <li class="table__cell">
-        <button type="button" class="table__trash"></button>
-        <img class="table__image table__area-image" src="./images/table/table_04_elbrus.jpg" alt="Эльбрус">
-        <h2 class="table__title table__area-title">Гора Эльбрус</h2>
-        <button type="button" class="table__icon table__area-icon"></button>
-      </li>
-      <li class="table__cell">
-        <button type="button" class="table__trash"></button>
-        <img class="table__image table__area-image" src="./images/table/table_05_dombay.jpg" alt="Домбай">
-        <h2 class="table__title table__area-title">Домбай</h2>
-        <button type="button" class="table__icon table__area-icon"></button>
-      </li>
-      <li class="table__cell">
-        <button type="button" class="table__trash"></button>
-        <img class="table__image table__area-image" src="./images/table/table_06_carachaevo_cherkessya.jpg" alt="Карачаево-Черкесия">
-        <h2 class="table__title table__area-title">Карачаево-Черкесия</h2>
-        <button type="button" class="table__icon table__area-icon"></button>
-      </li>
-    </ul>
+    <ul class="table"></ul>
   </section>
 </main>
 <footer class="footer">
   <p class="footer__paragraph">© 2023 Mesto Russia</p>
 </footer>
-<div class="popup popup_type_form">
+<div class="popup popup_type_form popup_type_profile">
   <div class="popup__container popup__container_type_form">
     <button type="button" class="popup__close popup__close_type_profile-edit" form="profiledit"></button>
     <div class="popup__form">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__items popup__items_type_profile-edit" id="profiledit" name="profiledit_frm">
-        <fieldset class="popup__fields popup__fields_type_profile-edit">
+        <form class="popup__items" id="profiledit" name="profiledit_frm">
           <input class="popup__input" type="text" name="profiledit_inp_name" placeholder="Имя">
           <input class="popup__input" type="text" name="profiledit_inp_about" placeholder="О себе">
-        </fieldset>
-        <button type="submit" class="popup__save popup__save_type_profile-edit">Сохранить</button>
+        <button type="submit" class="popup__save">Сохранить</button>
       </form>
     </div>
   </div>
 </div>
-<div class="popup popup_type_form">
+<div class="popup popup_type_form popup_type_card">
   <div class="popup__container popup__container_type_form">
     <button type="button" class="popup__close popup__close_type_card-add" form="cardadd"></button>
     <div class="popup__form">
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__items popup__items_type_card-add" id="cardadd" name="cardadd_frm">
-        <fieldset class="popup__fields popup__fields_type_card-add">
+        <form class="popup__items" id="cardadd" name="cardadd_frm">
           <input class="popup__input" type="text" name="cardadd_inp_name" placeholder="Название">
           <input class="popup__input" type="text" name="cardadd_inp_link" placeholder="Ссылка на картиннку">
-        </fieldset>
-        <button type="submit" class="popup__save popup__save_type_card-add">Создать</button>
+        <button type="submit" class="popup__save">Создать</button>
       </form>
+    </div>
+  </div>
+</div>
+<div class="popup popup_type_picture">
+  <div class="popup__container popup__container_type_picture">
+    <button type="button" class="popup__close popup__close_type_picture"></button>
+    <div class="popup__picture">
+      <img class="popup__image popup__image_type_big" src="./images/table/table_01_carachaevsk.jpg" alt="Карачаевск">
+      <p class="popup__caption">Карачаевск</p>
     </div>
   </div>
 </div>
@@ -105,16 +73,6 @@
     <button type="button" class="table__icon table__area-icon"></button>
   </li>
 </template>
-<template class="piture-popup-template">
-  <div class="popup popup_type_picture">
-    <div class="popup__container popup__container_type_picture">
-      <button type="button" class="popup__close popup__close_type_picture"></button>
-      <div class="popup__picture">
-        <img class="popup__image popup__image_type_small" src="./images/table/table_01_carachaevsk.jpg" alt="Карачаевск">
-        <p class="popup__caption">Карачаевск</p>
-      </div>
-    </div>
-  </div>
-</template>
+<script src="./scripts/cards.js"></script>
 <script src="./scripts/index.js"></script>
 </body></html>

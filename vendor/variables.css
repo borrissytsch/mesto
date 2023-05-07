@@ -65,8 +65,7 @@
    --profiledit_title_top: 35;
    --profiledit_radius: 10;
    --profiledit_items_left: 38;
-   --profiledit_fields_top: 5;
-   --profiledit_fields_left: 5;
+   --profiledit_items_top: 12;
    --profiledit_input_top: 33;
    --profiledit_input_width: 358;
    --profiledit_input_height: 22;
@@ -75,7 +74,7 @@
    --profiledit_input_lnhght_p: 17;
    --profiledit_save_width: 358;
    --profiledit_save_height: 50;
-   --profiledit_save_top: 44;
+   --profiledit_save_top: 54;
    --profiledit_save_alignleft: 2;
    --profiledit_save_bot: 27;
    --places_top: 50;
@@ -96,7 +95,6 @@
    --table_trash_width: 18;
    --table_trash_height: 19;
    --table_trash_aspect: var(--table_trash_width)/var(--table_trash_height);
-   --picture_popup_top: 90;
    --picture_popup_bigleft: 232;
    --picture_popup_smaleft: 424;
    --picture_popup_maxwdth: 75vw;
@@ -148,19 +146,18 @@
     --profiledit_popup_height: 322;
     --profiledit_items_left: 22;
     --profiledit_title_top: 27;
-    --profiledit_fields_top: 40;
-    --profiledit_fields_left: 3;
+    --profiledit_items_top: 48;
     --profiledit_input_top: 20;
     --profiledit_input_width: 238;
     --profiledit_input_height: 34;
     --profiledit_close_side: 20;
     --profiledit_close_gap: 16;
-    --profiledit_save_top: 34;
+    --profiledit_save_top: 40;
     --profiledit_save_bot: 25;
     --profiledit_save_width: 238;
     --profiledit_save_height: 46;
     --places_top: 36;
-    --picture_popup_top: 136;
+   /* --picture_popup_top: 136; */
     --footer_top: 48;
     --footer_bottom: 36;
     --picture_popup_bigleft: 40;
