@@ -1,3 +1,5 @@
-.popup__container_type_picture {
- /* margin-top: calc(var(--picture_popup_top)*1px); */
+@media screen and (max-width: 562px) {
+  .popup__container_type_picture {
+    max-width: 100%;
+  }
 }

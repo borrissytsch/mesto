@@ -3,6 +3,7 @@ const card_add_button = document.querySelector('.cousteau__button');
 const profile_name = document.querySelector('.cousteau__title');
 const profile_about = document.querySelector('.cousteau__subtitle');
 const profilePopup = document.querySelector('.popup.popup_type_profile');
+const buttons_close_popup = document.querySelectorAll('.popup__close');
 const cardPopup = document.querySelector('.popup.popup_type_card');
 const picturePopup = document.querySelector('.popup.popup_type_picture');
 const pictureImage = picturePopup.querySelector('.popup__image');
@@ -13,11 +14,13 @@ const card2add_sample = document.querySelector('.card-template').content.querySe
 initialCards.forEach((card) => {cards_container.append(addCard(card))});
 profile_edit_button.addEventListener('click', editProfile);
 card_add_button.addEventListener('click', () => openPopup(cardPopup));
-profilePopup.querySelector('.popup__close_type_profile-edit').addEventListener('click', () => closePopup(profilePopup));
-cardPopup.querySelector('.popup__close_type_card-add').addEventListener('click', () => closePopup(cardPopup));
-picturePopup.querySelector('.popup__close_type_picture').addEventListener('click', () => closePopup(picturePopup));
+buttons_close_popup.forEach(button => {const popup2close = button.closest('.popup'); 
+  button.addEventListener('click', () => closePopup(popup2close))
+});
 document.forms.profiledit_frm.addEventListener('submit', handleEditFormSubmit);
 document.forms.cardadd_frm.addEventListener('submit', handleAddCardForm);
+
+
 
 function addCard (cardData) {
   const card2addFromSample = card2add_sample.cloneNode(true);
