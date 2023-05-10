@@ -1,0 +1,7 @@
+.popup__input_validated:valid {
+  border: calc(var(--input_error_brdwidth)*1px) var(--input_error_linetype) var(--input_valid_brdcolor);
+}
+
+.popup__input_validated:invalid {
+  border: calc(var(--input_error_brdwidth)*1px) var(--input_error_linetype) var(--input_error_color);
+}

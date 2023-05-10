@@ -2,7 +2,7 @@
   margin-top: calc(var(--profiledit_input_top)*1px);
   width: calc(var(--profiledit_input_width)*1px);
   height: calc(var(--profiledit_input_height)*1px);
-  border: inherit;
+  border: none;
   font-size: calc(var(--profiledit_input_fnsize_p)*1px);
   line-height: calc(var(--profiledit_input_fnhght_p)*1px);
   font-weight: var(--default_text_fnwght);
