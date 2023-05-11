@@ -1,4 +1,3 @@
-const popups = document.querySelectorAll('.popup');
 const profile_edit_button = document.querySelector('.cousteau__box');
 const card_add_button = document.querySelector('.cousteau__button');
 const profile_name = document.querySelector('.cousteau__title');
@@ -11,30 +10,25 @@ const pictureImage = picturePopup.querySelector('.popup__image');
 const pictureCaption = picturePopup.querySelector('.popup__caption');
 const cards_container = document.querySelector('.table');
 const card2add_sample = document.querySelector('.card-template').content.querySelector('.table__cell');
-const forms2validate = document.querySelectorAll('.popup__items');
+const validationSettings = {formSelector: '.popup__items'
+  , inputSelector: '.popup__input'
+  , submitButtonSelector: '.popup__save'
+  , errorMsgSelector: '.popup__error-msg_type_'
+  , inactiveButtonClass: 'popup__save_disabled'
+  , inputErrorClass: 'popup__input_misfilled'
+  , errorClass: 'popup__error-msg_visible'
+}
+let currentPopup = null;
 
 initialCards.forEach((card) => {cards_container.append(addCard(card))});
 profile_edit_button.addEventListener('click', editProfile);
 card_add_button.addEventListener('click', renderCard);
 document.forms.profiledit_frm.addEventListener('submit', handleEditFormSubmit);
 document.forms.cardadd_frm.addEventListener('submit', handleAddCardForm);
-popups.forEach(popup2close => {addEventListener('click',
-  evt => {if(evt.target === popup2close) closePopup(popup2close)}
-)});
-popups.forEach(popup2close => {addEventListener('keydown',
-  evt => {if(evt.key === "Escape") closePopup(popup2close)}
-)});
 buttons_close_popup.forEach(button => {const popup2close = button.closest('.popup'); 
   button.addEventListener('click', () => closePopup(popup2close))
 });
-forms2validate.forEach(form2validate => {const submit_button = form2validate.querySelector('.popup__save')
-  if (!form2validate.hasAttribute('novalidate')) form2validate.setAttribute('novalidate', true);
-  form2validate.querySelectorAll('.popup__input').forEach(input_field => {
-    if (input_field.classList.contains('popup__input_validated')) input_field.classList.toggle('popup__input_validated');
-    input_field.addEventListener('input', evt => {evt.preventDefault;
-      performValidation({form: form2validate, input: evt.target, button: submit_button})
-    });
-}) });
+enableValidation(validationSettings);
 
 function addCard (cardData) {
   const card2addFromSample = card2add_sample.cloneNode(true);
@@ -57,43 +51,56 @@ function addCard (cardData) {
 }
 
 function renderCard(){
-  if (isFormInvalid (document.forms.cardadd_frm)) disableButton(cardPopup.querySelector('.popup__save'))
-  openPopup(cardPopup)
+  currentPopup = cardPopup;
+  restoreForm(document.forms.cardadd_frm);
+  openPopup(currentPopup)
 }
 
 function editProfile () {
   const thisForm = document.forms.profiledit_frm;
-  thisForm.elements.profiledit_inp_name.value = profile_name.textContent;
-  thisForm.elements.profiledit_inp_about.value = profile_about.textContent;
-  if (isFormInvalid (thisForm)) disableButton(profilePopup.querySelector('.popup__save'))
-  openPopup (profilePopup);
+  currentPopup = profilePopup;
+  restoreForm(thisForm, false);
+  thisForm.elements.profilename.value = profile_name.textContent;
+  thisForm.elements.profilabout.value = profile_about.textContent;
+  if (!isFormInvalid (thisForm, validationSettings)) enableButton(currentPopup.querySelector('.popup__save'), validationSettings.inactiveButtonClass);
+  openPopup (currentPopup);
 }
 
 function openPicture (picture) {
+  currentPopup = picturePopup;
   pictureImage.src = picture.src;
   pictureImage.alt = picture.alt;
   pictureCaption.textContent = picture.alt;
-  openPopup (picturePopup);
+  openPopup (currentPopup);
 }
 
 function openPopup (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown',  closeEscape)
+  popup.addEventListener('click', closeClick);
 }
 
 function closePopup(popup) {
-  if (popup.classList.contains('popup_type_form')) {
-    let thisForm = document.forms.profiledit_frm;
-    if (popup.classList.contains('popup_type_profile')) {
-      if (isFormInvalid(thisForm)) hideErrorFields(thisForm)
-      thisForm.elements.profiledit_inp_name.value = profile_name.textContent;
-      thisForm.elements.profiledit_inp_about.value = profile_about.textContent;
-    } else {
-      thisForm = document.forms.cardadd_frm;
-      if (isFormInvalid(thisForm)) hideErrorFields(thisForm)
-      clearForm(thisForm);
-    }
-  }
+  document.removeEventListener('keydown', closeEscape);
+  popup.removeEventListener('click', closeClick);
   popup.classList.remove('popup_opened');
+  currentPopup = null
+}
+
+function closeEscape (evt) {
+  if (evt.key === "Escape") closePopup(currentPopup);
+}
+
+function closeClick(evt) {
+  if (evt.target === currentPopup) closePopup(currentPopup);
+}
+
+function restoreForm(thisForm, clearFields_flag = true) {
+  if (isFormInvalid(thisForm, validationSettings)) {
+    hideErrorFields(thisForm, validationSettings)
+    disableButton(thisForm.closest('.popup').querySelector('.popup__save'), validationSettings.inactiveButtonClass)
+    if (clearFields_flag) clearForm(thisForm);
+  }
 }
 
 function clearForm (form, fillString = '') {
@@ -103,15 +110,15 @@ function clearForm (form, fillString = '') {
 function handleEditFormSubmit (evt) {
   // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. Так мы можем определить свою логику отправки.
-  profile_name.textContent = document.forms.profiledit_frm.elements.profiledit_inp_name.value;
-  profile_about.textContent = document.forms.profiledit_frm.elements.profiledit_inp_about.value;
+  profile_name.textContent = document.forms.profiledit_frm.elements.profilename.value;
+  profile_about.textContent = document.forms.profiledit_frm.elements.profilabout.value;
   closePopup(profilePopup);
 }
 
 function handleAddCardForm (evt) {
   evt.preventDefault();
   const thisForm = document.forms.cardadd_frm;
-  cards_container.prepend(addCard({name: thisForm.elements.cardadd_inp_name.value, link: thisForm.elements.cardadd_inp_link.value}));
+  cards_container.prepend(addCard({name: thisForm.elements.cardname.value, link: thisForm.elements.cardlink.value}));
   clearForm(thisForm);
   closePopup(cardPopup);
 }

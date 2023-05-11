@@ -35,11 +35,11 @@
     <button type="button" class="popup__close" form="profiledit"></button>
     <div class="popup__form">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__items" id="profiledit" name="profiledit_frm">
-        <input class="popup__input popup__input_validated" type="text" name="profiledit_inp_name" placeholder="Имя" minlength="2" maxlength="40" required>
-        <span class="popup__error-msg"></span>
-        <input class="popup__input popup__input_validated" type="text" name="profiledit_inp_about" placeholder="О себе" minlength="2" maxlength="200" required>
-        <span class="popup__error-msg"></span>
+      <form class="popup__items" id="profiledit" name="profiledit_frm" novalidate>
+        <input class="popup__input popup__input_validated" type="text" name="profilename" placeholder="Имя" minlength="2" maxlength="40" required>
+        <span class="popup__error-msg popup__error-msg_type_profilename"></span>
+        <input class="popup__input popup__input_validated" type="text" name="profilabout" placeholder="О себе" minlength="2" maxlength="200" required>
+        <span class="popup__error-msg popup__error-msg_type_profilabout"></span>
         <button type="submit" class="popup__save">Сохранить</button>
       </form>
     </div>
@@ -50,11 +50,11 @@
     <button type="button" class="popup__close" form="cardadd"></button>
     <div class="popup__form">
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__items" id="cardadd" name="cardadd_frm">
-        <input class="popup__input popup__input_validated" type="text" name="cardadd_inp_name" placeholder="Название" minlength="2" maxlength="30" required>
-        <span class="popup__error-msg"></span>
-        <input class="popup__input popup__input_validated" type="url" name="cardadd_inp_link" placeholder="Ссылка на картиннку" required>
-        <span class="popup__error-msg"></span>
+      <form class="popup__items" id="cardadd" name="cardadd_frm" novalidate>
+        <input class="popup__input popup__input_validated" type="text" name="cardname" placeholder="Название" minlength="2" maxlength="30" required>
+        <span class="popup__error-msg popup__error-msg_type_cardname"></span>
+        <input class="popup__input popup__input_validated" type="url" name="cardlink" placeholder="Ссылка на картиннку" required>
+        <span class="popup__error-msg popup__error-msg_type_cardlink"></span>
         <button type="submit" class="popup__save">Создать</button>
       </form>
     </div>

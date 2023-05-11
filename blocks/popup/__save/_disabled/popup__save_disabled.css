@@ -3,6 +3,7 @@
   box-sizing: border-box;
   border: 1px solid var(--profiledit_line_color);
   background-color: rgba(0, 0, 0, 0);
+  cursor: initial;
 }
 
 .popup__save_disabled:hover {

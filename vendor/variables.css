@@ -111,6 +111,9 @@
   --input_error_brdwidth: 1;
   --input_error_linetype: solid;
   --input_error_color: red;
+  --error_msg_left: 0;
+  --error_name_top: 136;
+  --error_link_top: 194;
   --input_valid_brdcolor: green;
 }
 
@@ -161,6 +164,11 @@
     --places_top: 36;
     --footer_top: 48;
     --footer_bottom: 36;
+    --input_error_fnsize_p: 11;
+    --input_error_lnhght_p: 14;
+    --error_name_top: 154;
+    --error_link_top: 212;
+  
   }
 }
 
