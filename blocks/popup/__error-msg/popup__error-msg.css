@@ -7,7 +7,7 @@
   line-height: calc(var(--input_error_lnhght_p)*1px);
   color: var(--input_error_color);
   opacity: 0;
-  border-bottom: 1px solid;
+  border: none;
   position: absolute;
   left: calc(var(--error_msg_left)*1px);
 }

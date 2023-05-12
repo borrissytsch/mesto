@@ -18,7 +18,6 @@ const validationSettings = {formSelector: '.popup__items'
   , inputErrorClass: 'popup__input_misfilled'
   , errorClass: 'popup__error-msg_visible'
 }
-let currentPopup = null;
 
 initialCards.forEach((card) => {cards_container.append(addCard(card))});
 profile_edit_button.addEventListener('click', editProfile);
@@ -28,6 +27,9 @@ document.forms.cardadd_frm.addEventListener('submit', handleAddCardForm);
 buttons_close_popup.forEach(button => {const popup2close = button.closest('.popup'); 
   button.addEventListener('click', () => closePopup(popup2close))
 });
+document.querySelectorAll('.popup').forEach(popup2close => {addEventListener('click',
+  evt => {if(evt.target === popup2close) closePopup(popup2close)}
+)});
 enableValidation(validationSettings);
 
 function addCard (cardData) {
@@ -51,48 +53,41 @@ function addCard (cardData) {
 }
 
 function renderCard(){
-  currentPopup = cardPopup;
   restoreForm(document.forms.cardadd_frm);
-  openPopup(currentPopup)
+  openPopup(cardPopup)
 }
 
 function editProfile () {
   const thisForm = document.forms.profiledit_frm;
-  currentPopup = profilePopup;
   restoreForm(thisForm, false);
   thisForm.elements.profilename.value = profile_name.textContent;
   thisForm.elements.profilabout.value = profile_about.textContent;
-  if (!isFormInvalid (thisForm, validationSettings)) enableButton(currentPopup.querySelector('.popup__save'), validationSettings.inactiveButtonClass);
-  openPopup (currentPopup);
+  if (!isFormInvalid (thisForm, validationSettings)) enableButton(profilePopup.querySelector('.popup__save'), validationSettings.inactiveButtonClass);
+  openPopup (profilePopup);
 }
 
 function openPicture (picture) {
-  currentPopup = picturePopup;
   pictureImage.src = picture.src;
   pictureImage.alt = picture.alt;
   pictureCaption.textContent = picture.alt;
-  openPopup (currentPopup);
+  openPopup (picturePopup);
 }
 
 function openPopup (popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown',  closeEscape)
-  popup.addEventListener('click', closeClick);
 }
 
 function closePopup(popup) {
   document.removeEventListener('keydown', closeEscape);
-  popup.removeEventListener('click', closeClick);
-  popup.classList.remove('popup_opened');
-  currentPopup = null
+ popup.classList.remove('popup_opened');
 }
 
 function closeEscape (evt) {
-  if (evt.key === "Escape") closePopup(currentPopup);
-}
-
-function closeClick(evt) {
-  if (evt.target === currentPopup) closePopup(currentPopup);
+  if (evt.key === "Escape") {
+   const openedPopup = document.querySelector('.popup_opened');
+   closePopup(openedPopup);
+  }
 }
 
 function restoreForm(thisForm, clearFields_flag = true) {
