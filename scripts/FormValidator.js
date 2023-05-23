@@ -5,7 +5,7 @@ class FormValidator {
   constructor (form, validationSettings) {
     this.#form2validate = form;
     this.#formFields = { inputs: form.querySelectorAll(validationSettings.inputSelector)
-      , submit_button: this.#form2validate.querySelector(validationSettings.submitButtonSelector)
+      , submitButton: this.#form2validate.querySelector(validationSettings.submitButtonSelector)
     };
     this.#validationData = { errorMsgSelector: validationSettings.errorMsgSelector
       , inactiveButtonClass: validationSettings.inactiveButtonClass
@@ -14,16 +14,15 @@ class FormValidator {
     };
   }
   
-  enableValidation(eventSet_flag = true, fiedlsClear_flag = false) {
-    if (eventSet_flag) this.#setEventListeners();
-    this.#restoreForm(fiedlsClear_flag);
+  enableValidation() {
+    this.#setEventListeners();
   }
   
   #setEventListeners() {
-    const submit_button = this.#formFields.submit_button
+    const submitButton = this.#formFields.submitButton
     this.#formFields.inputs.forEach(input_field => {
       input_field.addEventListener('input', evt => {evt.preventDefault;
-        this.#performValidation({input: evt.target, button: submit_button})
+        this.#performValidation({input: evt.target, button: submitButton})
       });
     })
   }
@@ -65,23 +64,18 @@ class FormValidator {
     button2disable.setAttribute('disabled', true)
     button2disable.classList.add(inactiveButtonClass)
   }
-  
-    #restoreForm(clearFields_flag = true) {
-    if (clearFields_flag) this.#clearForm();
-    if (this.#isFormInvalid()) {
-      this.#disableButton(this.#formFields.submit_button, this.#validationData.inactiveButtonClass)
-    } else {
-      this.#enableButton(this.#formFields.submit_button, this.#validationData.inactiveButtonClass)
-    }
-    this.#hideErrorFields()
-  }
 
   #hideErrorFields () {
     this.#formFields.inputs.forEach(field => {this.#setInputValid (field)})
   }
-
-  #clearForm (fillString = '') {
-    this.#formFields.inputs.forEach(field => {field.value = fillString})
+  
+  restoreForm() {
+    if (this.#isFormInvalid()) {
+      this.#disableButton(this.#formFields.submitButton, this.#validationData.inactiveButtonClass)
+    } else {
+      this.#enableButton(this.#formFields.submitButton, this.#validationData.inactiveButtonClass)
+    }
+    this.#hideErrorFields()
   }
 }
 

@@ -1,6 +1,7 @@
 class Card {
   #cardName;
   #cardLink;
+  #cardTemplate;
   #cardElement;
   #cardFields;
   #cardLikeClass;
@@ -9,18 +10,20 @@ class Card {
   constructor (cardData, cardSettings) {
     this.#cardName = cardData.name;
     this.#cardLink = cardData.link;
-    this.#cardElement = document.querySelector(cardSettings.templateSelector).content.querySelector(cardSettings.containerSelector).cloneNode(true);
+    this.#cardTemplate = document.querySelector(cardSettings.templateSelector);
+    this.#cardElement = this.#createElement(cardSettings.containerSelector);
     this.#cardFields = { image: this.#cardElement.querySelector(cardSettings.imageSelector)
       , icon: this.#cardElement.querySelector(cardSettings.iconSelector)
       , title: this.#cardElement.querySelector(cardSettings.titleSelector)
       , trash: this.#cardElement.querySelector(cardSettings.trashSelector)
     }
     this.#cardLikeClass = cardSettings.likeIconClass;
-    this.#openPopup = cardSettings.openPopupMethod;
-    this.#popupFields = { popup: cardSettings.picturePopupRef
-      , image: cardSettings.pictureImageRef
-      , caption: cardSettings.pictureCaptionRef
+    this.#openPopup = cardSettings.pictureRefs.openPopupMethod;
+    this.#popupFields = { popup: cardSettings.pictureRefs.picturePopupRef
+      , image: cardSettings.pictureRefs.pictureImageRef
+      , caption: cardSettings.pictureRefs.pictureCaptionRef
     }
+
     this.#cardFields.image.alt = this.#cardName;
     this.#cardFields.image.src = this.#cardLink;
     this.#cardFields.title.textContent = this.#cardName;
@@ -32,11 +35,15 @@ class Card {
       () => {this.#cardFields.icon.classList.toggle(this.#cardLikeClass)}
     );
     this.#cardFields.trash.addEventListener('click', 
-      () => {this.#cardElement.remove()}
+      () => {this.#cardElement.remove(); this.#cardElement = null}
     );
     this.#cardFields.image.addEventListener('click', 
       () => {this.#openPicture (this.#cardFields.image)}
     );
+  }
+
+  #createElement(containerSelector, contentsCopy_flag = true) {
+    return this.#cardTemplate.content.querySelector(containerSelector).cloneNode(contentsCopy_flag);
   }
 
   #openPicture (picture) {

@@ -1,47 +1,34 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-const profile_edit_button = document.querySelector('.cousteau__box');
-const card_add_button = document.querySelector('.cousteau__button');
-const profile_name = document.querySelector('.cousteau__title');
-const profile_about = document.querySelector('.cousteau__subtitle');
+const profileEdit_button = document.querySelector('.cousteau__box');
+const cardAdd_button = document.querySelector('.cousteau__button');
+const profileName = document.querySelector('.cousteau__title');
+const profileAbout = document.querySelector('.cousteau__subtitle');
 const profilePopup = document.querySelector('.popup.popup_type_profile');
-const buttons_close_popup = document.querySelectorAll('.popup__close');
+const buttonsClose_popup = document.querySelectorAll('.popup__close');
 const cardPopup = document.querySelector('.popup.popup_type_card');
 const picturePopup = document.querySelector('.popup.popup_type_picture');
 const pictureImage = picturePopup.querySelector('.popup__image');
 const pictureCaption = picturePopup.querySelector('.popup__caption');
-const cards_container = document.querySelector('.table');
-
-const validationSettings = { inputSelector: '.popup__input'
-  , submitButtonSelector: '.popup__save'
-  , errorMsgSelector: '.popup__error-msg_type_'
-  , inactiveButtonClass: 'popup__save_disabled'
-  , inputErrorClass: 'popup__input_misfilled'
-  , errorClass: 'popup__error-msg_visible'
-};
-const cardSettings = {templateSelector: '.card-template'
-  , containerSelector: '.table__cell'
-  , imageSelector: '.table__image'
-  , iconSelector: '.table__icon'
-  , titleSelector: '.table__title'
-  , trashSelector: '.table__trash'
-  , likeIconClass: 'table__icon_like'
-  , openPopupMethod: openPopup
+const cardsContainer = document.querySelector('.table');
+const cardPicture_refs = { openPopupMethod: openPopup
   , picturePopupRef: picturePopup
   , pictureImageRef: pictureImage
   , pictureCaptionRef: pictureCaption
 };
+
 const profileValidator = new FormValidator(profilePopup.querySelector('.popup__items'), validationSettings);
 const cardValidator = new FormValidator(cardPopup.querySelector('.popup__items'), validationSettings);
 
+cardSettings.pictureRefs = cardPicture_refs;
 initialCards.forEach((card) => {const card2add = new Card(card, cardSettings).getCard();
-  cards_container.append(card2add);
+  cardsContainer.append(card2add);
 });
-profile_edit_button.addEventListener('click', editProfile);
-card_add_button.addEventListener('click', renderCard);
+profileEdit_button.addEventListener('click', editProfile);
+cardAdd_button.addEventListener('click', renderCard);
 document.forms.profiledit_frm.addEventListener('submit', handleEditFormSubmit);
 document.forms.cardadd_frm.addEventListener('submit', handleAddCardForm);
-buttons_close_popup.forEach(button => {const popup2close = button.closest('.popup'); 
+buttonsClose_popup.forEach(button => {const popup2close = button.closest('.popup'); 
   button.addEventListener('click', () => closePopup(popup2close))
 });
 document.querySelectorAll('.popup').forEach(popup2close => {addEventListener('click',
@@ -50,15 +37,16 @@ document.querySelectorAll('.popup').forEach(popup2close => {addEventListener('cl
 profileValidator.enableValidation(); cardValidator.enableValidation();
 
 function renderCard(){
-  cardValidator.enableValidation(false, true);
-  openPopup(cardPopup)
+  clearForm (document.forms.cardadd_frm)
+  cardValidator.restoreForm();
+  openPopup(cardPopup);
 }
 
 function editProfile () {
   const thisForm = document.forms.profiledit_frm;
-  thisForm.elements.profilename.value = profile_name.textContent;
-  thisForm.elements.profilabout.value = profile_about.textContent;
-  profileValidator.enableValidation(false);
+  thisForm.elements.profilename.value = profileName.textContent;
+  thisForm.elements.profilabout.value = profileAbout.textContent;
+  profileValidator.restoreForm();
   openPopup (profilePopup);
 }
 
@@ -79,11 +67,15 @@ function closeEscape (evt) {
   }
 }
 
+function clearForm (form, fillString = '') {
+  form.querySelectorAll('.popup__input').forEach(field => {field.value = fillString})
+}
+
 function handleEditFormSubmit (evt) {
   // Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. Так мы можем определить свою логику отправки.
-  profile_name.textContent = document.forms.profiledit_frm.elements.profilename.value;
-  profile_about.textContent = document.forms.profiledit_frm.elements.profilabout.value;
+  evt.preventDefault();
+  profileName.textContent = document.forms.profiledit_frm.elements.profilename.value;
+  profileAbout.textContent = document.forms.profiledit_frm.elements.profilabout.value;
   closePopup(profilePopup);
 }
 
@@ -91,6 +83,6 @@ function handleAddCardForm (evt) {
   evt.preventDefault();
   const thisForm = document.forms.cardadd_frm;
   const card2add = new Card({name: thisForm.elements.cardname.value, link: thisForm.elements.cardlink.value}, cardSettings).getCard();
-  cards_container.prepend(card2add);
+  cardsContainer.prepend(card2add);
   closePopup(cardPopup);
 }
