@@ -5,8 +5,7 @@ class Card {
   #cardElement;
   #cardFields;
   #cardLikeClass;
-  #openPopup;
-  #popupFields;
+  #handleCardClick
   constructor (cardData, cardSettings) {
     this.#cardName = cardData.name;
     this.#cardLink = cardData.link;
@@ -18,12 +17,7 @@ class Card {
       , trash: this.#cardElement.querySelector(cardSettings.trashSelector)
     }
     this.#cardLikeClass = cardSettings.likeIconClass;
-    this.#openPopup = cardSettings.pictureRefs.openPopupMethod;
-    this.#popupFields = { popup: cardSettings.pictureRefs.picturePopupRef
-      , image: cardSettings.pictureRefs.pictureImageRef
-      , caption: cardSettings.pictureRefs.pictureCaptionRef
-    }
-
+    this.#handleCardClick = cardSettings.handleCardClick;
     this.#cardFields.image.alt = this.#cardName;
     this.#cardFields.image.src = this.#cardLink;
     this.#cardFields.title.textContent = this.#cardName;
@@ -38,19 +32,12 @@ class Card {
       () => {this.#cardElement.remove(); this.#cardElement = null}
     );
     this.#cardFields.image.addEventListener('click', 
-      () => {this.#openPicture (this.#cardFields.image)}
+      () => {this.#handleCardClick (this.#cardFields.image)}
     );
   }
 
   #createElement(containerSelector, contentsCopy_flag = true) {
     return this.#cardTemplate.content.querySelector(containerSelector).cloneNode(contentsCopy_flag);
-  }
-
-  #openPicture (picture) {
-    this.#popupFields.image.src = picture.src;
-    this.#popupFields.image.alt = picture.alt;
-    this.#popupFields.caption.textContent = picture.alt;
-    this.#openPopup (this.#popupFields.popup);
   }
 
   getCard() {
