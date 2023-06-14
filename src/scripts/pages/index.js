@@ -8,64 +8,58 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 
-const profileEdit_button = document.querySelector('.cousteau__box');
-const cardAdd_button = document.querySelector('.cousteau__button');
+const buttonOpenEditProfileForm = document.querySelector(constants.profileEditButtonSelector);
+const buttonOpenAddCardForm = document.querySelector(constants.cardAddButtonSelector);
 const profileForm = document.querySelector(constants.profileSelector).querySelector(constants.formSelector);
 const cardForm = document.querySelector(constants.cardSelector).querySelector(constants.formSelector);
 
-const profilePopup = new PopupWithForm( constants.profileSelector, {formSelector: constants.formSelector
+const profilePopup = new PopupWithForm(constants.profileSelector, {formSelector: constants.formSelector
   , handleFormSubmit: handleEditFormSubmit
   , button: constants.buttonCloseSelector}
 );
-const cardPopup = new PopupWithForm( constants.cardSelector, {formSelector: constants.formSelector
+const cardPopup = new PopupWithForm(constants.cardSelector, {formSelector: constants.formSelector
   , handleFormSubmit: handleAddCardForm
   , button: constants.buttonCloseSelector}
 );
 const picturePopup = new PopupWithImage( constants.pictureSelector
   , {image: constants.pictureImageSelector, caption: constants.pictureCaptionSelector, button: constants.buttonCloseSelector}
 );
-const userCousteau = new UserInfo({name: constants.userNameSelector, about: constants.userAboutSelector});
+const userInfo = new UserInfo({name: constants.userNameSelector, about: constants.userAboutSelector});
 const profileValidator = new FormValidator(profileForm, constants.validationSettings);
 const cardValidator = new FormValidator(cardForm, constants.validationSettings);
 
-constants.cardSettings.handleCardClick = picturePopup.openPopup.bind(picturePopup);
-new Section({ items: constants.initialCards, renderer: 
+constants.cardSettings.handleCardClick = picturePopup.open.bind(picturePopup);
+const cardRenderItems = new Section({ items: constants.initialCards, renderer: 
   (card, container) => {container.append(new Card(card, constants.cardSettings).getCard())}}
   , constants.cardContainerSelector
 ).renderItems();
 
-profileEdit_button.addEventListener('click', () => profilePopup.openPopup(presetProfileForm));
-cardAdd_button.addEventListener('click', () => cardPopup.openPopup(presetCardForm));
+buttonOpenEditProfileForm.addEventListener('click', () => profilePopup.open(presetProfileForm));
+buttonOpenAddCardForm.addEventListener('click', () => cardPopup.open(presetCardForm));
 profileValidator.enableValidation(); cardValidator.enableValidation();
 
 function presetCardForm(){
-  clearForm (cardForm);
   cardValidator.restoreForm();
 }
 
 function presetProfileForm () {
-  profileForm.elements.profilename.value = userCousteau.getUserInfo().name;
-  profileForm.elements.profilabout.value = userCousteau.getUserInfo().about;
+  profileForm.elements.profilename.value = userInfo.getUserInfo().name;
+  profileForm.elements.profilabout.value = userInfo.getUserInfo().about;
   profileValidator.restoreForm();
-}
-
-function clearForm (form, fillString = '') {
-  form.querySelectorAll(constants.inputSelector).forEach(field => {field.value = fillString});
 }
 
 function handleEditFormSubmit (evt) {
   evt.preventDefault();
-  userCousteau.setUserInfo({ name: profileForm.elements.profilename.value
+  userInfo.setUserInfo({ name: profileForm.elements.profilename.value
     , about: profileForm.elements.profilabout.value}
   );
-  profilePopup.closePopup();
+  profilePopup.close();
 }
 
 function handleAddCardForm (evt) {
   evt.preventDefault();
-  new Section ({items: new Card({ name: cardForm.elements.cardname.value, link: cardForm.elements.cardlink.value}
-    , constants.cardSettings).getCard()}
-    , constants.cardContainerSelector
-  ).addItem();
-  cardPopup.closePopup();
+  cardRenderItems.addItem(
+    new Card({name: cardForm.elements.cardname.value, link: cardForm.elements.cardlink.value}, constants.cardSettings).getCard()
+  );
+  cardPopup.close();
 }

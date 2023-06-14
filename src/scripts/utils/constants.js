@@ -1,5 +1,5 @@
-/* External config data */
-export const initialCards = [{
+/* External config data: before webpack building add export prefix to all consts */
+ export const initialCards = [{
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },{
@@ -31,6 +31,8 @@ export const buttonCloseSelector = '.popup__close';
 export const userNameSelector = '.cousteau__title';
 export const userAboutSelector = '.cousteau__subtitle';
 export const cardContainerSelector = '.table';
+export const profileEditButtonSelector = '.cousteau__box';
+export const cardAddButtonSelector = '.cousteau__button';
 export const validationSettings = { inputSelector: '.popup__input'
   , submitButtonSelector: '.popup__save'
   , errorMsgSelector: '.popup__error-msg_type_'

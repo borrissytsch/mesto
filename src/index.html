@@ -11,11 +11,13 @@
 </head>
 <body class="page">
 <header  class="header">
+  <!-- img src="../images/header/logo.svg" class="header__logo" alt="Лого Место" -->
   <img src="<%=require('../images/header/logo.svg')%>" class="header__logo" alt="Лого Место">
 </header>
 <main class="content">
   <section class="cousteau">
     <div class="cousteau__item">
+      <!-- img src="../images/cousteau/cousteau_image.png" class="cousteau__image cousteau__area-photo" alt="Жак-Ив Кусто" -->
       <img src="<%=require('../images/cousteau/cousteau_image.png')%>" class="cousteau__image cousteau__area-photo" alt="Жак-Ив Кусто">
       <h1 class="cousteau__title cousteau__area-title">Жак-Ив Кусто</h1>
       <button type="button" class="cousteau__box cousteau__area-box" form="profiledit"></button>
@@ -64,6 +66,7 @@
   <div class="popup__container popup__container_type_picture">
     <button type="button" class="popup__close"></button>
     <div class="popup__picture">
+      <!-- img class="popup__image" src="../images/table/table_01_carachaevsk.jpg" alt="Карачаевск" -->
       <img class="popup__image" src="<%=require('../images/table/table_01_carachaevsk.jpg')%>" alt="Карачаевск">
       <p class="popup__caption">Карачаевск</p>
     </div>
@@ -72,6 +75,7 @@
 <template class="card-template">
   <li class="table__cell">
     <button type="button" class="table__trash"></button>
+    <!-- img class="table__image table__area-image" src="../images/table/table_01_carachaevsk.jpg" alt="Карачаевск" -->
     <img class="table__image table__area-image" src="<%=require('../images/table/table_01_carachaevsk.jpg')%>" alt="Карачаевск">
     <h2 class="table__title table__area-title">Карачаевск</h2>
     <button type="button" class="table__icon table__area-icon"></button>

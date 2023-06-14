@@ -1,5 +1,5 @@
 :root {
-  /* For local debugging add ../../ to all backimage urls, these are paths 4 webpack */
+  /* For local debugging add ../../ to all backimage urls (for black_heart_icon:  ../../../), these are paths 4 webpack */
   --cousteau_back_image: url(./../../images/cousteau/button_plus.png);
   --cousteau_inner_box: url(./../../images/cousteau/cousteau_inner_box.png);
   --table_trash_icon: url(./../../images/table/trash_icon.svg);
