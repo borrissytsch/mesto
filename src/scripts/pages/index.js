@@ -15,22 +15,20 @@ const cardForm = document.querySelector(constants.cardSelector).querySelector(co
 
 const profilePopup = new PopupWithForm(constants.profileSelector, {formSelector: constants.formSelector
   , handleFormSubmit: handleEditFormSubmit
-  , button: constants.buttonCloseSelector}
-);
+});
 const cardPopup = new PopupWithForm(constants.cardSelector, {formSelector: constants.formSelector
   , handleFormSubmit: handleAddCardForm
-  , button: constants.buttonCloseSelector}
-);
+});
 const picturePopup = new PopupWithImage( constants.pictureSelector
-  , {image: constants.pictureImageSelector, caption: constants.pictureCaptionSelector, button: constants.buttonCloseSelector}
+  , {image: constants.pictureImageSelector, caption: constants.pictureCaptionSelector}
 );
 const userInfo = new UserInfo({name: constants.userNameSelector, about: constants.userAboutSelector});
 const profileValidator = new FormValidator(profileForm, constants.validationSettings);
 const cardValidator = new FormValidator(cardForm, constants.validationSettings);
 
 constants.cardSettings.handleCardClick = picturePopup.open.bind(picturePopup);
-const cardRenderItems = new Section({ items: constants.initialCards, renderer: 
-  (card, container) => {container.append(new Card(card, constants.cardSettings).getCard())}}
+const cardsList = new Section({ items: constants.initialCards, renderer: 
+  (card, container) => {container.append(createCard(card, constants.cardSettings))}}
   , constants.cardContainerSelector
 ).renderItems();
 
@@ -58,8 +56,12 @@ function handleEditFormSubmit (evt) {
 
 function handleAddCardForm (evt) {
   evt.preventDefault();
-  cardRenderItems.addItem(
-    new Card({name: cardForm.elements.cardname.value, link: cardForm.elements.cardlink.value}, constants.cardSettings).getCard()
+  cardsList.addItem(
+    createCard({name: cardForm.elements.cardname.value, link: cardForm.elements.cardlink.value}, constants.cardSettings)
   );
   cardPopup.close();
+}
+
+function createCard({name: cardCaption, link: cardAddress}, cardSettings) {
+  return new Card({name: cardCaption, link: cardAddress}, cardSettings).getCard();
 }
