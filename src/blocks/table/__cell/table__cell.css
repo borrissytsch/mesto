@@ -6,9 +6,9 @@
   display: grid;
   grid-template-areas: 
     "image image"
-    "caption icon";
-  grid-template-columns: auto;
-  grid-template-rows: auto calc((var(--table_height) - var(--table_img_size))*1px);
+    "caption like";
+  grid-template-columns: var(--table_caption_fract) auto;
+  grid-template-rows: calc(var(--table_img_size)*1px) auto;
   justify-content: flex-start;
   align-items: center;
   border-radius: calc(var(--table_radius)*1px);

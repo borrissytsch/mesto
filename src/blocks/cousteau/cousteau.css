@@ -1,6 +1,7 @@
 .cousteau {
   margin-left: calc((var(--cousteau_left))*1px);
   margin-right: calc(var(--cousteau_right)*1px);
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
