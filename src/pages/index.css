@@ -48,15 +48,14 @@
 @import url(../blocks/table/__image/table__image.css);
 @import url(../blocks/table/__area-image/table__area-image.css);
 @import url(../blocks/table/__trash/table__trash.css);
+@import url(../blocks/table/__trash/_active/table__trash_active.css);
 @import url(../blocks/table/__title/table__title.css);
 @import url(../blocks/table/__area-title/table__area-title.css);
 @import url(../blocks/table/__like/table__like.css);
 @import url(../blocks/table/__area-like/table__area-like.css);
 @import url(../blocks/table/__icon/table__icon.css);
 @import url(../blocks/table/__icon/_like/table__icon_like.css);
-/* @import url(../blocks/table/__area-icon/table__area-icon.css);*/
 @import url(../blocks/table/__liken/table__liken.css);
 @import url(../blocks/table/__liken/_active/table__liken_active.css);
-/*@import url(../blocks/table/__area-liken/table__area-liken.css);*/
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__paragraph/footer__paragraph.css);

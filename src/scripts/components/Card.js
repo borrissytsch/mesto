@@ -1,46 +1,52 @@
-class Card {
-  #cardName;
-  #cardLink;
+export default class Card {
+  #cardName; #cardLink; #cardID; #ownerID; #cardLikes;
   #cardTemplate;
   #cardElement;
   #cardFields;
-  #cardLikeClass;
-  #likenActiveClass; // added liken active class property
-  #handleCardClick;
-  #handleTrashClick;
-  #handleLikeClick;
-  constructor (cardData, {cardSettings, cardTrashHandler, cardLikeHandler}) { // add like handler
+  #trashActiveClass; #cardLikeClass; #likenActiveClass;
+  #handleCardClick; #handleTrashClick; #handleLikeClick; #handleTrashVisibility;
+  constructor (cardData, {cardSettings, cardTrashHandler, cardLikeHandler, сardClickHandler, trashVisibilityHandler}) {
     this.#cardName = cardData.name;
     this.#cardLink = cardData.link;
+    this.#cardID = cardData._id;
+    this.#ownerID = cardData.owner._id;
     this.#cardTemplate = document.querySelector(cardSettings.templateSelector);
     this.#cardElement = this.#createElement(cardSettings.containerSelector);
     this.#cardFields = { image: this.#cardElement.querySelector(cardSettings.imageSelector)
       , icon: this.#cardElement.querySelector(cardSettings.iconSelector)
-      , liken: this.#cardElement.querySelector(cardSettings.likenSelector) // added liken field
+      , liken: this.#cardElement.querySelector(cardSettings.likenSelector)
       , title: this.#cardElement.querySelector(cardSettings.titleSelector)
       , trash: this.#cardElement.querySelector(cardSettings.trashSelector)
     }
+    this.#trashActiveClass = cardSettings.trashActiveClass
     this.#cardLikeClass = cardSettings.likeIconClass;
-    this.#likenActiveClass = cardSettings.likenActiveClass; // added liken active class
-    this.#handleCardClick = cardSettings.handleCardClick;
+    this.#likenActiveClass = cardSettings.likenActiveClass;
     this.#cardFields.image.alt = this.#cardName;
     this.#cardFields.image.src = this.#cardLink;
     this.#cardFields.title.textContent = this.#cardName;
-    this.#handleTrashClick = cardTrashHandler; // open confirm form in index.js
-    this.#handleLikeClick = cardLikeHandler;   // open like handler in index.js
+    this.#handleTrashClick = cardTrashHandler;
+    this.#handleLikeClick = cardLikeHandler;
+    this.#handleCardClick = сardClickHandler;
+    this.#handleTrashVisibility = trashVisibilityHandler;
+    if (this.#handleTrashVisibility(this.#ownerID)) this.#cardFields.trash.classList.add(this.#trashActiveClass)
+    if (cardData.likes) {this.#cardLikes = cardData.likes} else {this.#cardLikes = []}
+    if (this.#cardLikes.length > 0) {
+      this.#cardFields.liken.textContent = this.#cardLikes.length;
+      this.#cardFields.liken.classList.add(this.#likenActiveClass);
+    }
     this.#addCardListeners();
   }
   
   #addCardListeners() {
     this.#cardFields.icon.addEventListener('click', () => {
       this.#cardFields.icon.classList.toggle(this.#cardLikeClass);
-      this.#cardFields.liken.classList.toggle(this.#likenActiveClass); // added toggle linken active
-      // alert(`${this.#cardElement.classList} / ${this.#cardFields.liken.classList}`)
-      this.#handleLikeClick (this.#cardElement, this.#cardFields.liken);
+      this.#handleLikeClick (this.#cardElement, this.#cardID, this.#cardFields.liken);
     });
-    this.#cardFields.trash.addEventListener('click', 
-      () => this.#handleTrashClick(() => {this.#cardElement.remove(); this.#cardElement = null}) 
-    );
+    if (this.#handleTrashVisibility(this.#ownerID)) {
+      this.#cardFields.trash.addEventListener('click', 
+        () => this.#handleTrashClick(this.#cardElement, this.#cardID)
+      );
+    }
     this.#cardFields.image.addEventListener('click', 
       () => {this.#handleCardClick (this.#cardFields.image)}
     );
@@ -53,6 +59,16 @@ class Card {
   getCard() {
     return this.#cardElement;
   }
-}
 
-export default Card;
+  getCardInfo() {
+    return {name: this.#cardName, link: this.#cardLink, id: this.#cardID, owner: this.#ownerID, likes: this.#cardLikes
+      , element: this.#cardElement
+      , fields: {image: this.#cardFields.image
+        , icon: this.#cardFields.icon
+        , liken: this.#cardFields.liken
+        , title: this.#cardFields.title
+        , trash: this.#cardFields.trash
+      }
+    };     
+  }
+}

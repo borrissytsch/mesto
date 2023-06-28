@@ -11,4 +11,5 @@
   border: none;
   object-fit: contain;
   cursor: pointer;
+  visibility: hidden;
 }
