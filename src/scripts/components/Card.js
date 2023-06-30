@@ -1,73 +1,88 @@
 export default class Card {
-  #cardName; #cardLink; #cardID; #ownerID; #cardLikes;
-  #cardTemplate;
-  #cardElement;
-  #cardFields;
-  #trashActiveClass; #cardLikeClass; #likenActiveClass;
+  //#cardName; #cardLink; #cardID; #ownerID; #cardLikes;
+  //#cardTemplate;
+  //#cardElement;
+  //#cardFields;
+  //#trashActiveClass; #cardLikeClass; #likenActiveClass;
   #handleCardClick; #handleTrashClick; #handleLikeClick; #handleTrashVisibility;
   constructor (cardData, {cardSettings, cardTrashHandler, cardLikeHandler, сardClickHandler, trashVisibilityHandler}) {
-    this.#cardName = cardData.name;
-    this.#cardLink = cardData.link;
-    this.#cardID = cardData._id;
-    this.#ownerID = cardData.owner._id;
-    this.#cardTemplate = document.querySelector(cardSettings.templateSelector);
-    this.#cardElement = this.#createElement(cardSettings.containerSelector);
-    this.#cardFields = { image: this.#cardElement.querySelector(cardSettings.imageSelector)
-      , icon: this.#cardElement.querySelector(cardSettings.iconSelector)
-      , liken: this.#cardElement.querySelector(cardSettings.likenSelector)
-      , title: this.#cardElement.querySelector(cardSettings.titleSelector)
-      , trash: this.#cardElement.querySelector(cardSettings.trashSelector)
+    this._cardName = cardData.name;
+    this._cardLink = cardData.link;
+    this._cardID = cardData._id;
+    this._ownerID = cardData.owner._id;
+    this._cardTemplate = document.querySelector(cardSettings.templateSelector);
+    this._cardElement = this.#createElement(cardSettings.containerSelector);
+    this._cardFields = { image: this._cardElement.querySelector(cardSettings.imageSelector)
+      , icon: this._cardElement.querySelector(cardSettings.iconSelector)
+      , liken: this._cardElement.querySelector(cardSettings.likenSelector)
+      , title: this._cardElement.querySelector(cardSettings.titleSelector)
+      , trash: this._cardElement.querySelector(cardSettings.trashSelector)
     }
-    this.#trashActiveClass = cardSettings.trashActiveClass
-    this.#cardLikeClass = cardSettings.likeIconClass;
-    this.#likenActiveClass = cardSettings.likenActiveClass;
-    this.#cardFields.image.alt = this.#cardName;
-    this.#cardFields.image.src = this.#cardLink;
-    this.#cardFields.title.textContent = this.#cardName;
-    this.#handleTrashClick = cardTrashHandler;
-    this.#handleLikeClick = cardLikeHandler;
-    this.#handleCardClick = сardClickHandler;
-    this.#handleTrashVisibility = trashVisibilityHandler;
-    if (this.#handleTrashVisibility(this.#ownerID)) this.#cardFields.trash.classList.add(this.#trashActiveClass)
-    if (cardData.likes) {this.#cardLikes = cardData.likes} else {this.#cardLikes = []}
-    if (this.#cardLikes.length > 0) {
-      this.#cardFields.liken.textContent = this.#cardLikes.length;
-      this.#cardFields.liken.classList.add(this.#likenActiveClass);
-    }
+    this._trashActiveClass = cardSettings.trashActiveClass
+    this._cardLikeClass = cardSettings.likeIconClass;
+    this._likenActiveClass = cardSettings.likenActiveClass;
+    this._cardFields.image.alt = this._cardName;
+    this._cardFields.image.src = this._cardLink;
+    this._cardFields.title.textContent = this._cardName;
+    this._handleTrashClick = cardTrashHandler;
+    this._handleLikeClick = cardLikeHandler;
+    this._handleCardClick = сardClickHandler;
+    this._handleTrashVisibility = trashVisibilityHandler;
+    if (this._handleTrashVisibility(this._ownerID)) this._cardFields.trash.classList.add(this._trashActiveClass)
+    if (cardData.likes) {this._cardLikes = cardData.likes} else {this._cardLikes = []}
+    this._updateLikesView()
     this.#addCardListeners();
   }
   
   #addCardListeners() {
-    this.#cardFields.icon.addEventListener('click', () => {
-      this.#cardFields.icon.classList.toggle(this.#cardLikeClass);
-      this.#handleLikeClick (this.#cardElement, this.#cardID, this.#cardFields.liken);
+    this._cardFields.icon.addEventListener('click', () => {
+      this._handleLikeClick (this);
     });
-    if (this.#handleTrashVisibility(this.#ownerID)) {
-      this.#cardFields.trash.addEventListener('click', 
-        () => this.#handleTrashClick(this.#cardElement, this.#cardID)
+    if (this._handleTrashVisibility(this._ownerID)) {
+      this._cardFields.trash.addEventListener('click', 
+        () => this._handleTrashClick(this, this._cardID)
       );
     }
-    this.#cardFields.image.addEventListener('click', 
-      () => {this.#handleCardClick (this.#cardFields.image)}
+    this._cardFields.image.addEventListener('click', 
+      () => {this._handleCardClick ({src: this.getCardInfo().link, alt: this.getCardInfo().name})}
     );
   }
 
+  isLiked() {
+    return this._cardLikes.some((like) => like._id == this._ownerID)
+  }
+
+  _updateLikesView() {
+    this._cardFields.liken.textContent = this._cardLikes.length;
+    this._cardFields.icon.classList.toggle(this._cardLikeClass, this.isLiked());
+    this._cardFields.liken.classList.toggle(this._likenActiveClass, this._cardLikes.length > 0);
+  }
+
+  updateLikes(likes) {
+    this._cardLikes = likes;
+    this._updateLikesView()
+  }
+
+  removeCard(){
+    this._cardElement.remove(); this._cardElement = null;
+  }
+
   #createElement(containerSelector, contentsCopy_flag = true) {
-    return this.#cardTemplate.content.querySelector(containerSelector).cloneNode(contentsCopy_flag);
+    return this._cardTemplate.content.querySelector(containerSelector).cloneNode(contentsCopy_flag);
   }
 
   getCard() {
-    return this.#cardElement;
+    return this._cardElement;
   }
 
   getCardInfo() {
-    return {name: this.#cardName, link: this.#cardLink, id: this.#cardID, owner: this.#ownerID, likes: this.#cardLikes
-      , element: this.#cardElement
-      , fields: {image: this.#cardFields.image
-        , icon: this.#cardFields.icon
-        , liken: this.#cardFields.liken
-        , title: this.#cardFields.title
-        , trash: this.#cardFields.trash
+    return {name: this._cardName, link: this._cardLink, id: this._cardID, owner: this._ownerID, likes: this._cardLikes
+      , element: this._cardElement
+      , fields: {image: this._cardFields.image
+        , icon: this._cardFields.icon
+        , liken: this._cardFields.liken
+        , title: this._cardFields.title
+        , trash: this._cardFields.trash
       }
     };     
   }

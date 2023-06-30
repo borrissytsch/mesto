@@ -10,7 +10,9 @@ export default class PopupWithForm extends Popup {
   }
 
   #setEventListeners() {
-    this.#form.addEventListener('submit', this.#handleFormSubmit);
+    this.#form.addEventListener('submit'
+      , (evt) => {evt.preventDefault(); this.#handleFormSubmit(this._getInputValues())}
+    );
   }
 
   open(presetForm) {
@@ -23,7 +25,8 @@ export default class PopupWithForm extends Popup {
     super.close();
   }
 
-  #getInputValues() {
+  //#getInputValues() {
+  _getInputValues() {
     const inputValues = {};
     Array.from(this.#form.elements).forEach(element => {
       if(element.hasAttribute('name')) inputValues[element.name] = this.#form.elements[element.name].value

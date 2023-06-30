@@ -1,56 +1,53 @@
 export default class Api {
-#serverLogin;
-#serverToken;
-#userDir;
+//#serverLogin; #serverToken;
+//#userDir;
 constructor (loginData) {
-  this.#serverLogin = (dir) => loginData.login (dir);
-  this.#serverToken = loginData.token;
-  this.#userDir = loginData.userDir;
+  this._serverLogin = (dir) => loginData.login (dir);
+  this._serverToken = loginData.token;
+  this._userDir = loginData.userDir;
 }
 
-  autorize(handler, dir = this.#userDir, request = 'GET') {
-    return fetch(this.#serverLogin(dir), {method: request
-      , headers: {authorization: this.#serverToken}
-    }).then(res => {
-        if (res.ok) return res.json();
-        Promise.reject(`Api promise error: ${res.status}`);
-    }).then((result) => 
-        {if (handler) handler(result)}
-    ).catch((err) => console.log(err))
+  autorize(dir = this._userDir, handler = this._retPromiseResponse, request = 'GET') {
+    return fetch(this._serverLogin(dir), {method: request
+      , headers: {authorization: this._serverToken}
+    }).then((res, msg = `${dir} autorize ${request} `) => handler(res, msg));
   }
 
-  getInitialCards(handler) {
-    return this.autorize(handler, 'cards')
+  _retPromiseResponse(res, errMsg = '', theOnlyMsg_flag = false) {
+    if (res.ok) return res.json();
+    return Promise.reject(theOnlyMsg_flag ? errMsg : `Api ${errMsg}promise error: ${res.status}`);
   }
 
-  updateProfile(userData, handler, dir = this.#userDir, request = 'PATCH') {
-    return fetch(this.#serverLogin(dir), {method: request
-      , headers: {authorization: this.#serverToken
+  getInitialCards(handler = this._retPromiseResponse) {
+    return this.autorize('cards', handler)
+  }
+
+  updateProfile(userData, dir = this._userDir, handler = this._retPromiseResponse, request = 'PATCH') {
+    return fetch(this._serverLogin(dir), {method: request
+      , headers: {authorization: this._serverToken
       , 'Content-Type': 'application/json'
       }
       , body: JSON.stringify(userData)
-    }).then(res => {if (res.ok) return res.json(); Promise.reject(`Api promise error: ${res.status}`);})
-      .then((result) => {if (handler) handler(result)}
-    ).catch((err) => console.log(err))
+    }).then((res, msg = `${dir} update profile ${request} `) => handler(res, msg));
   }
 
-  updateAvatar(avatar, handler, dir = `${this.#userDir}/avatar`) {
-    return this.updateProfile({avatar}, handler, dir);
+  updateAvatar(avatar, dir = `${this._userDir}/avatar`, handler  = this._retPromiseResponse) {
+    return this.updateProfile({avatar}, dir, handler);
   }
 
-  addCard(cardData, handler, dir = 'cards', request = 'POST') {
-    return this.updateProfile(cardData, handler, dir, request);
+  addCard(cardData, dir = 'cards', handler = this._retPromiseResponse, request = 'POST') {
+    return this.updateProfile(cardData, dir, handler, request);
   }
 
-  deleteCard(cardID, handler, dir = `cards/${cardID}`, request = 'DELETE') {
-    return this.autorize(handler, dir, request)    
+  deleteCard(cardID, dir = `cards/${cardID}`, handler = this._retPromiseResponse, request = 'DELETE') {
+    return this.autorize(dir, handler, request);
   }
 
-  addLike(cardID, handler, dir = `cards/${cardID}/likes`, request = 'PUT') {
-    return this.autorize(handler, dir, request)    
+  addLike(cardID, dir = `cards/${cardID}/likes`, handler = this._retPromiseResponse, request = 'PUT') {
+    return this.autorize(dir, handler, request)
   }
 
-  deleteLike(cardID, handler, dir = `cards/${cardID}/likes`, request = 'DELETE') {
-    return this.autorize(handler, dir, request)
+  deleteLike(cardID, dir = `cards/${cardID}/likes`, handler = this._retPromiseResponse, request = 'DELETE') {
+    return this.autorize(dir, handler, request)
   }
 }

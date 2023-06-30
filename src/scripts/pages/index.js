@@ -10,7 +10,6 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 
-const srvCardLimit = 36; let cardsList = null;
 const buttonOpenAvatarEditForm = document.querySelector(constants.avatarEditButtonSelector);
 const buttonOpenEditProfileForm = document.querySelector(constants.profileEditButtonSelector);
 const buttonOpenAddCardForm = document.querySelector(constants.cardAddButtonSelector);
@@ -41,6 +40,10 @@ const picturePopup = new PopupWithImage( constants.pictureSelector
 const userInfo = new UserInfo({name: constants.userNameSelector, about: constants.userAboutSelector
   , avatar: constants.userAvatarSelector}, true
 );
+const cardsList = new Section( constants.cardContainerSelector
+  , (card, container) => {container.append(createCard(card
+  , {cardSettings: constants.cardSettings, handleCardTrash, handleCardLike}))}
+);
 
 const avatarValidator = new FormValidator(avatarForm, constants.validationSettings);
 const profileValidator = new FormValidator(profileForm, constants.validationSettings);
@@ -52,21 +55,12 @@ buttonOpenAddCardForm.addEventListener('click', () => cardPopup.open(presetCardF
 avatarValidator.enableValidation(); profileValidator.enableValidation(); cardValidator.enableValidation();
 
 const mestApi = new Api(constants.srvLoginData);
-const userMe = mestApi.autorize((result, user = userInfo) => {
-  user.setUserInfo({name: result.name, about: result.about, avatar: result.avatar, id: result._id, cohort: result.cohort})
-});
-
-mestApi.getInitialCards(getCardsApiHandler);
-
-function getCardsApiHandler(result) {
-  const srvCards = []; let i = 0;
-  result.forEach(item => {if (i++ < srvCardLimit || srvCardLimit == 0) srvCards.push(item)});
-  cardsList = new Section({ items: srvCards
-    , renderer: (card, container) => {container.append(createCard(card
-    , {cardSettings: constants.cardSettings, handleCardTrash, handleCardLike}))}}
-    , constants.cardContainerSelector
-  ).renderItems()
-}
+Promise.all([mestApi.autorize(), mestApi.getInitialCards()]).then(result => {
+  userInfo.setUserInfo({name: result[0].name, about: result[0].about, avatar: result[0].avatar
+    , id: result[0]._id, cohort: result[0].cohort
+  });
+  cardsList.renderItems(result[1]);
+}).catch((err) => console.log(err));
 
 function presetCardForm(){
   cardValidator.restoreForm();
@@ -76,25 +70,28 @@ function handleCardTrash(cardElement, cardID) {
   confirmPopup.open(cardElement, cardID);
 }
 
-function handleConfirmForm (evt) {
-  evt.preventDefault();
+function handleConfirmForm () {
   confirmPopup.close(clickTrashApiHandler);
 }
 
-function clickTrashApiHandler (cardID, cardElement) {
-  mestApi.deleteCard(cardID, (result, element = cardElement) => {element.remove(); element = null})
+function clickTrashApiHandler (cardID, card2delete) {
+  mestApi.deleteCard(cardID).then(
+    (result, card = card2delete) => card.removeCard()
+  ).catch((err) => console.log(err))
 }
 
-function handleCardLike (card, cardID, liken) {
-  const likenBeforeClick = liken.textContent;
-  if(card.querySelector(constants.cardSettings.iconSelector).classList.contains(constants.cardSettings.likeIconClass)) {
-    mestApi.addLike(cardID, (result => {liken.textContent = result.likes.length;
-      if (likenBeforeClick == 0 & liken.textContent > 0) liken.classList.toggle(constants.cardSettings.likenActiveClass);
-    }))
+//function handleCardLike (card, cardID, liken) {
+function handleCardLike (card) {
+  if(card.isLiked()) {
+    mestApi.deleteLike(card.getCardInfo().id).then(result => {
+      //Object.keys(result.likes[0]).forEach(key => alert(`${result.likes[0]} ${key}`))
+      card.updateLikes(result.likes)
+    }).catch((err) => console.log(err))
   } else {
-    mestApi.deleteLike(cardID, (result => {liken.textContent = result.likes.length;
-      if (likenBeforeClick > 0 & liken.textContent == 0) liken.classList.toggle(constants.cardSettings.likenActiveClass);
-    }))
+    mestApi.addLike(card.getCardInfo().id).then(result => {
+      //Object.keys(result.likes[0]).forEach(key => alert(`${result.likes[0]} ${key}`))
+      card.updateLikes(result.likes)
+    }).catch((err) => console.log(err))
   }
 }
 
@@ -108,51 +105,39 @@ function presetProfileForm () {
   profileValidator.restoreForm();
 }
 
-function handleAvatarFormSubmit (evt) {
-  evt.preventDefault();
+function handleAvatarFormSubmit (inputValues) {
   const previousButtonCaption = setElementCaption(avatarSubmitButton);
-  mestApi.updateAvatar(document.forms.avataredit.elements.avatarlink.value
-    , (result, user = userInfo) => updateAvatarApiHandler);
-  avatarPopup.close();
+  mestApi.updateAvatar(inputValues.avatarlink).then( result => {
+    userInfo.setUserInfo({name: result.name, about: result.about, avatar: result.avatar
+      , id: result._id, cohort: result.cohort}
+    );
+    avtarImage.src = userInfo.getUserInfo().avatar;
+    avatarPopup.close();
+  }
+  ).catch(err => {alert(`Avatar err: ${err}`); console.log(err)}
+  ).finally(setElementCaption(avatarSubmitButton, previousButtonCaption));
 }
 
-function updateAvatarApiHandler(result, user) {
-  user.setUserInfo(
-    {name: result.name, about: result.about, avatar: result.avatar, id: result._id, cohort: result.cohort}
-  );
-  avtarImage.src = user.getUserInfo().avatar;
-  setElementCaption(avatarSubmitButton, previousButtonCaption)
-}
-
-function handleEditFormSubmit (evt) {
-  evt.preventDefault();
+function handleEditFormSubmit (inputValues) {
   const previousButtonCaption = setElementCaption(profileSubmitButton);
-  mestApi.updateProfile({name: profileForm.elements.profilename.value, about: profileForm.elements.profilabout.value}
-    , (result, user = userInfo) => editProfileApiHandler);
-  profilePopup.close();
+  mestApi.updateProfile({name: inputValues.profilename, about: inputValues.profilabout}).then
+    (result => {userInfo.setUserInfo({name: result.name, about: result.about, avatar: result.avatar
+    , id: result._id, cohort: result.cohort});
+    profilePopup.close()}
+  ).catch((err) => console.log(err)
+  ).finally(setElementCaption(profileSubmitButton, previousButtonCaption));
 }
 
-function editProfileApiHandler(result, user) {
-  user.setUserInfo(
-    {name: result.name, about: result.about, avatar: result.avatar, id: result._id, cohort: result.cohort});
-  setElementCaption(profileSubmitButton, previousButtonCaption);
-}
-
-function handleAddCardForm (evt) {
-  evt.preventDefault();
+function handleAddCardForm (inputValues) {
   const previousButtonCaption = setElementCaption(cardSubmitButton);
-  mestApi.addCard({name: cardForm.elements.cardname.value, link: cardForm.elements.cardlink.value}
-    , (result, renderer = cardsList) => addCardApiHandler);
-  cardPopup.close();
-}
-
-function addCardApiHandler(result, renderer){
-  renderer.addItem({name: result.name, link: result.link, _id: result._id
-    , owner: result.owner, likes: result.likes} , {cardSettings: constants.cardSettings
-    , cardTrashHandler: handleCardTrash, cardLikeHandler: handleCardLike, сardClickHandler: handleCardClick
-    , handleTrashVisibility}
-  );
-  setElementCaption(cardSubmitButton, previousButtonCaption);
+  mestApi.addCard({name: inputValues.cardname, link: inputValues.cardlink}).then(
+    result => { cardsList.addItem({name: result.name, link: result.link, _id: result._id
+      , owner: result.owner, likes: result.likes} , {cardSettings: constants.cardSettings
+      , cardTrashHandler: handleCardTrash, cardLikeHandler: handleCardLike}
+    );
+    cardPopup.close();
+  }).catch((err) => console.log(err)
+  ).finally(setElementCaption(cardSubmitButton, previousButtonCaption));
 }
 
 function setElementCaption(element, caption = constants.msgSubmitButtonWait, savePrevious_flag = true) {

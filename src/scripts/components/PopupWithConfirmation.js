@@ -12,7 +12,7 @@ export default class PopupWithConfirmation extends PopupWithForm {
   }
 
   close(deleteCardHandler) {
-    deleteCardHandler(this.#cardID, this.#cardElement)
+    if(deleteCardHandler) deleteCardHandler(this.#cardID, this.#cardElement)
     super.close();
   }
 }
