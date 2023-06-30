@@ -81,16 +81,17 @@ function clickTrashApiHandler (cardID, card2delete) {
 }
 
 //function handleCardLike (card, cardID, liken) {
-function handleCardLike (card) {
-  if(card.isLiked()) {
+function handleCardLike (card, initialClicks_flag = false) {
+  const isLiked = card.getCardInfo().likes.some(like => like._id == userInfo.getUserInfo().id);
+  if (initialClicks_flag) return isLiked;
+  if(isLiked) {
     mestApi.deleteLike(card.getCardInfo().id).then(result => {
-      //Object.keys(result.likes[0]).forEach(key => alert(`${result.likes[0]} ${key}`))
-      card.updateLikes(result.likes)
-    }).catch((err) => console.log(err))
+      card.updateLikes(result.likes, false)
+    }
+    ).catch((err) => console.log(err))
   } else {
     mestApi.addLike(card.getCardInfo().id).then(result => {
-      //Object.keys(result.likes[0]).forEach(key => alert(`${result.likes[0]} ${key}`))
-      card.updateLikes(result.likes)
+      card.updateLikes(result.likes, true)
     }).catch((err) => console.log(err))
   }
 }

@@ -30,7 +30,7 @@ export default class Card {
     this._handleTrashVisibility = trashVisibilityHandler;
     if (this._handleTrashVisibility(this._ownerID)) this._cardFields.trash.classList.add(this._trashActiveClass)
     if (cardData.likes) {this._cardLikes = cardData.likes} else {this._cardLikes = []}
-    this._updateLikesView()
+    this._updateLikesView(this._handleLikeClick (this, true))
     this.#addCardListeners();
   }
   
@@ -48,19 +48,15 @@ export default class Card {
     );
   }
 
-  isLiked() {
-    return this._cardLikes.some((like) => like._id == this._ownerID)
-  }
-
-  _updateLikesView() {
+  _updateLikesView(isLiked) {
     this._cardFields.liken.textContent = this._cardLikes.length;
-    this._cardFields.icon.classList.toggle(this._cardLikeClass, this.isLiked());
+    this._cardFields.icon.classList.toggle(this._cardLikeClass, isLiked);
     this._cardFields.liken.classList.toggle(this._likenActiveClass, this._cardLikes.length > 0);
   }
 
-  updateLikes(likes) {
+  updateLikes(likes, isLiked) {
     this._cardLikes = likes;
-    this._updateLikesView()
+    this._updateLikesView(isLiked)
   }
 
   removeCard(){
