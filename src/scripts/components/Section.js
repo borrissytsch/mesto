@@ -11,7 +11,7 @@ export default class Section {
       return this;
     }
   
-    addItem(item, addAfter_flag = false) {
+    addItem(item, addAfter_flag = true) {
       if (addAfter_flag) {
         this._itemContainer.append(item);
       } else {
