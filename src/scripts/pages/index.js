@@ -41,8 +41,7 @@ const userInfo = new UserInfo({name: constants.userNameSelector, about: constant
   , avatar: constants.userAvatarSelector}, true
 );
 const cardsList = new Section( constants.cardContainerSelector
-  , (card, container) => {container.append(createCard(card
-  , {cardSettings: constants.cardSettings, handleCardTrash, handleCardLike}))}
+  , card => createCard(card, {cardSettings: constants.cardSettings, handleCardTrash, handleCardLike})
 );
 
 const avatarValidator = new FormValidator(avatarForm, constants.validationSettings);
@@ -80,7 +79,6 @@ function clickTrashApiHandler (cardID, card2delete) {
   ).catch((err) => console.log(err))
 }
 
-//function handleCardLike (card, cardID, liken) {
 function handleCardLike (card, initialClicks_flag = false) {
   const isLiked = card.getCardInfo().likes.some(like => like._id == userInfo.getUserInfo().id);
   if (initialClicks_flag) return isLiked;
@@ -112,11 +110,10 @@ function handleAvatarFormSubmit (inputValues) {
     userInfo.setUserInfo({name: result.name, about: result.about, avatar: result.avatar
       , id: result._id, cohort: result.cohort}
     );
-    avtarImage.src = userInfo.getUserInfo().avatar;
     avatarPopup.close();
   }
-  ).catch(err => {alert(`Avatar err: ${err}`); console.log(err)}
-  ).finally(setElementCaption(avatarSubmitButton, previousButtonCaption));
+  ).catch(err => {console.log(err)}
+  ).finally(() => setElementCaption(avatarSubmitButton, constants.captionProfileButton));
 }
 
 function handleEditFormSubmit (inputValues) {
@@ -126,7 +123,7 @@ function handleEditFormSubmit (inputValues) {
     , id: result._id, cohort: result.cohort});
     profilePopup.close()}
   ).catch((err) => console.log(err)
-  ).finally(setElementCaption(profileSubmitButton, previousButtonCaption));
+  ).finally(() => setElementCaption(profileSubmitButton, constants.captionProfileButton));
 }
 
 function handleAddCardForm (inputValues) {
@@ -138,7 +135,7 @@ function handleAddCardForm (inputValues) {
     );
     cardPopup.close();
   }).catch((err) => console.log(err)
-  ).finally(setElementCaption(cardSubmitButton, previousButtonCaption));
+  ).finally(() => setElementCaption(cardSubmitButton, constants.captionCardButton));
 }
 
 function setElementCaption(element, caption = constants.msgSubmitButtonWait, savePrevious_flag = true) {

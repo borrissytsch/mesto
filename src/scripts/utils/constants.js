@@ -76,3 +76,5 @@ export const cardSettings = {templateSelector: '.card-template'
 
 /* Miscellaneous messaging/captions' consts */
 export const msgSubmitButtonWait = 'Сохранение ...';
+export const captionProfileButton = 'Сохранить';
+export const captionCardButton = 'Создать';
