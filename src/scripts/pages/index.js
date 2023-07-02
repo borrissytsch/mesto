@@ -128,10 +128,7 @@ function handleEditFormSubmit (inputValues) {
 function handleAddCardForm (inputValues) {
   const previousButtonCaption = setElementCaption(cardSubmitButton);
   mestApi.addCard({name: inputValues.cardname, link: inputValues.cardlink}).then(
-    result => { cardsList.addItem({name: result.name, link: result.link, _id: result._id
-      , owner: result.owner, likes: result.likes} , {cardSettings: constants.cardSettings
-      , cardTrashHandler: handleCardTrash, cardLikeHandler: handleCardLike}
-    );
+    result => { cardsList.renderItems([result]);
     cardPopup.close();
   }).catch((err) => console.log(err)
   ).finally(() => setElementCaption(cardSubmitButton, constants.captionCardButton));
