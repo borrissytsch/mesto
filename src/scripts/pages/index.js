@@ -131,7 +131,7 @@ function handleAddCardForm (inputValues) {
     result => { cardsList.renderItems([result]);
     cardPopup.close();
   }).catch((err) => console.log(err)
-  ).finally(() => setElementCaption(cardSubmitButton, constants.captionCardButton));
+  ).finally(() => {setElementCaption(cardSubmitButton, constants.captionCardButton); location.reload()});
 }
 
 function setElementCaption(element, caption = constants.msgSubmitButtonWait, savePrevious_flag = true) {
