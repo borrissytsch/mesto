@@ -131,7 +131,6 @@ function handleAddCardForm (inputValues) {
     result => { cardsList.addItem({name: result.name, link: result.link, _id: result._id
       , owner: result.owner, likes: result.likes} , {cardSettings: constants.cardSettings
       , cardTrashHandler: handleCardTrash, cardLikeHandler: handleCardLike}
-      , false
     );
     cardPopup.close();
   }).catch((err) => console.log(err)
