@@ -5,8 +5,7 @@ export default class Section {
     this._renderer = renderer;
     this._itemContainer = document.querySelector(containerSelector);
   }
-
-  //renderItems(items, renderer = item => this.addItem(this._renderer(item))) {
+  
   renderItems(items, useClass_flag = false, renderer = useClass_flag
     ? item => this._renderer(item) : item => this.addItem(this._renderer(item), true))
   {
