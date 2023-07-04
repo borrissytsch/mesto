@@ -59,7 +59,7 @@ Promise.all([mestApi.autorize(), mestApi.getInitialCards()]).then(result => {
     , id: result[0]._id, cohort: result[0].cohort
   });
   cardsList.renderItems(result[1]);
-}).catch((err) => console.log(err));
+}).catch((err) => console.log(`Get initial cards/user info: ${err}`));
 
 function presetCardForm(){
   cardValidator.restoreForm();
@@ -76,7 +76,7 @@ function handleConfirmForm () {
 function clickTrashApiHandler (cardID, card2delete) {
   mestApi.deleteCard(cardID).then(
     (result, card = card2delete) => card.removeCard()
-  ).catch((err) => console.log(err))
+  ).catch((err) => console.log(`Trash card delete: ${err}`))
 }
 
 function handleCardLike (card, initialClicks_flag = false) {
@@ -86,11 +86,11 @@ function handleCardLike (card, initialClicks_flag = false) {
     mestApi.deleteLike(card.getCardInfo().id).then(result => {
       card.updateLikes(result.likes, false)
     }
-    ).catch((err) => console.log(err))
+    ).catch((err) => console.log(`Card delete like: ${err}`))
   } else {
     mestApi.addLike(card.getCardInfo().id).then(result => {
       card.updateLikes(result.likes, true)
-    }).catch((err) => console.log(err))
+    }).catch((err) => console.log(`Card add like: ${err}`))
   }
 }
 
@@ -99,7 +99,9 @@ function presetAvatarForm(){
 }
 
 function presetProfileForm () {
-  userInfo.setUserProfile(userInfo.getUserInfo().name, userInfo.getUserInfo().about);
+  const userData = userInfo.getUserInfo()
+  profileForm.profilename.value = userData.name
+  profileForm.profilabout.value = userData.about
   profileValidator.restoreForm();
 }
 
@@ -111,7 +113,7 @@ function handleAvatarFormSubmit (inputValues) {
     );
     avatarPopup.close();
   }
-  ).catch(err => {console.log(err)}
+  ).catch(err => {console.log(`Avatar form: ${err}`)}
   ).finally(() => setElementCaption(avatarSubmitButton, constants.captionProfileButton));
 }
 
@@ -121,7 +123,7 @@ function handleEditFormSubmit (inputValues) {
     (result => {userInfo.setUserInfo({name: result.name, about: result.about, avatar: result.avatar
     , id: result._id, cohort: result.cohort});
     profilePopup.close()}
-  ).catch((err) => console.log(err)
+  ).catch((err) => console.log(`Edit form: ${err}`)
   ).finally(() => setElementCaption(profileSubmitButton, constants.captionProfileButton));
 }
 
@@ -131,7 +133,7 @@ function handleAddCardForm (inputValues) {
     result => { cardsList.addItem(createCard(result
       , {cardSettings: constants.cardSettings, handleCardTrash, handleCardLike}));
     cardPopup.close();
-  }).catch((err) => console.log(err)
+  }).catch((err) => console.log(`Add card form: ${err}`)
   ).finally(() => {setElementCaption(cardSubmitButton, constants.captionCardButton)});
 }
 
